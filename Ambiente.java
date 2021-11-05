@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 /**
  * Classe Ambiente - um ambiente em um jogo adventure.
  *
@@ -15,11 +17,8 @@
  */
 public class Ambiente 
 {
-    public String descricao;
-    public Ambiente saidaNorte;
-    public Ambiente saidaSul;
-    public Ambiente saidaLeste;
-    public Ambiente saidaOeste;
+    private String descricao;
+    HashMap<String, Ambiente> saidas;
 
     /**
      * Cria um ambiente com a "descricao" passada. Inicialmente, ele
@@ -33,26 +32,17 @@ public class Ambiente
     public Ambiente(String descricao) 
     {
         this.descricao = descricao;
+        saidas = new HashMap<>();
     }
 
     /**
-     * Define as saidas do ambiente. Cada direcao ou leva a um
-     * outro ambiente ou eh null (nenhuma saida para la).
-     * @param norte A saida norte.
-     * @param leste A saida leste.
-     * @param sul A saida sul.
-     * @param oeste A saida oeste.
+     * Define uma saida desse ambiente
+     * @param direcao A direcao da saida.
+     * @param vizinho O ambiente na direcao dada
      */
-    public void ajustarSaidas(Ambiente norte, Ambiente leste, Ambiente sul, Ambiente oeste) 
+    public void ajustarSaida(String direcao, Ambiente vizinho)
     {
-        if(norte != null)
-            saidaNorte = norte;
-        if(leste != null)
-            saidaLeste = leste;
-        if(sul != null)
-            saidaSul = sul;
-        if(oeste != null)
-            saidaOeste = oeste;
+        saidas.put(direcao, vizinho);
     }
 
     /**
@@ -61,6 +51,31 @@ public class Ambiente
     public String getDescricao()
     {
         return descricao;
+    }
+
+
+    /**
+     * Retorna o Ambiente que é acessado saindo deste ambiente pela direcao.
+     * se não tem nenhum Ambiente, retorna null.
+     * @param direcao A direção da saida.
+     * @return O Ambiente em dada direção.
+     */
+    public Ambiente getSaida(String direcao){
+        return saidas.get(direcao);
+    }
+
+    /**
+     * Return a description of the room’s exits,
+     * for example, "Exits: north west".
+     * @return A description of the available exits.
+     */
+    public String getSaidaString(){
+        String strSaidas = "";
+        for(String s: saidas.keySet()){
+            strSaidas += s + " ";
+        }
+
+        return strSaidas;
     }
 
 }
