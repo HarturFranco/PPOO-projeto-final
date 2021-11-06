@@ -1,19 +1,19 @@
 import java.util.HashMap;
 
 /**
- * Classe Ambiente - um ambiente em um jogo adventure.
+ * Classe Sala - uma sala em um jogo adventure.
  *
- * Esta classe eh parte da aplicacao "World of Zuul".
- * "World of Zuul" eh um jogo de aventura muito simples, baseado em texto.  
+ * Esta classe eh parte da aplicacao "Fuga da Masmorra".
+ * "Fuga da Masmorral" eh um jogo de aventura muito simples, baseado em texto.  
  *
- * Um "Ambiente" representa uma localizacao no cenario do jogo. Ele eh
- * conectado aos outros ambientes atraves de saidas. As saidas sao
- * nomeadas como norte, sul, leste e oeste. Para cada direcao, o ambiente
- * guarda uma referencia para o ambiente vizinho, ou null se nao ha
- * saida naquela direcao.
+ * A classe "Sala" é a classe que define os ambientes em que o
+ *  jogador irá navegar. Uma sala pode ter uma ou mais salas vizinhas,
+ *  as quais podem se mostrar perigosas ou não.
+ * A classe "Sala" diz respeito as salas báscias, sem perigo e que não são
+ *  a saída da masmorra, outros tipos de salas específicas herdam dela.
  * 
- * @author  Michael Kölling and David J. Barnes (traduzido por Julio Cesar Alves)
- * @version 2011.07.31 (2016.02.01)
+ * @author  Alexandre Rabello, Arthur Franco, Felipe Godoi e João Paulo Paiva.
+ * @version 2021.11.06
  */
 public class Sala
 {
@@ -21,13 +21,9 @@ public class Sala
     HashMap<String, Sala> saidas;
 
     /**
-     * Cria um ambiente com a "descricao" passada. Inicialmente, ele
-     * nao tem saidas. "descricao" eh algo como "uma cozinha" ou
-     * "
-     * Create a room described "description". Initially, it has
-     * no exits. "description" is something like "a kitchen" or
-     * "um jardim aberto".
-     * @param descricao A descricao do ambiente.
+     * Cria ua sala com a "descricao" passada. Inicialmente, ela
+     * nao tem saidas. "descricao" eh algo como "Sala 01" ou "Sala 02"
+     * 
      */
     public Sala(String descricao)
     {
@@ -37,16 +33,16 @@ public class Sala
 
     /**
      * Define uma saida desse ambiente
-     * @param direcao A direcao da saida.
+     * @param numero,  cordenada de uma saida.
      * @param vizinho O ambiente na direcao dada
      */
-    public void ajustarSaida(String direcao, Sala vizinho)
+    public void adicionarSaida(String cordenada, Sala adjacente)
     {
-        saidas.put(direcao, vizinho);
+        saidas.put(cordenada, adjacente);
     }
 
     /**
-     * @return A descricao do ambiente.
+     * @return A descricao da sala.
      */
     public String getDescricao()
     {
@@ -55,20 +51,21 @@ public class Sala
 
 
     /**
-     * Retorna o Ambiente que é acessado saindo deste ambiente pela direcao.
-     * se não tem nenhum Ambiente, retorna null.
-     * @param direcao A direção da saida.
-     * @return O Ambiente em dada direção.
+     * Retorna a sala para qual o jogador vai.
+     * se essa sala não é acssível, retorna null.
+     * @param cordenada, cordenada da sala que o jogador quer entrar.
+     * @return A sala para qual o jogador irá.
      */
-    public Sala getSaida(String direcao){
-        return saidas.get(direcao);
+    public Sala getSaida(String cordenada){
+        return saidas.get(cordenada);
     }
 
     /**
-     * Return a description of the room’s exits,
-     * for example, "Exits: north west".
-     * @return A description of the available exits.
+     * 
+     * @return A descrição das salas adjacentes.
+     * por exemplo 'adjacentes: sala01, sala02, sala03'".
      */
+     
     public String getSaidaString(){
         String strSaidas = "";
         for(String s: saidas.keySet()){
@@ -77,5 +74,46 @@ public class Sala
 
         return strSaidas;
     }
+    
+    /**
+     * @return String com o sons ou brisas que essa sala leva às suas salas vizinhas
+     * por exemplo "uma brisa fria"
+     * nesse caso, a sala não produz nada de anormal, então retorna uma string vazia. 
+     */
+    public String getSom(){
+        return "";
+    }
 
+
+    /**
+     * @return String mostrando o que o jogador vê, ouve e sente ao entrar nessa sala.
+     * nesse caso, sendo uma sala segura ele vê as outras salas e ouve possíveis sons/ brisas
+     *  vindos das salas vizinhas.
+     */
+    public String entrarNaSala(){
+        String s = "Você dá passos firmes em direção à "+this.descricao+". \n Passando por um corredor escuro, consegue chegar ao outro lado.\n";
+        s = s + "Ao chegar, você percebe que tochas iluminam as portas das salas: " + this.getSaidaString() + "\n";
+        
+        Sala sala;
+        for(String dir: saidas.keySet()){
+            sala = this.saidas.get(dir);
+            s += sala.getSom();
+        }
+        return s;
+    }
+    
+    
+    /**
+     * @return String com o que acontece ao atirar em direção à sala.
+     * nesse caso, a sala não contem o monstro vivo e, ao atirar nela,
+     *  o jogador gasta sua última bala e atrai o monstro para si com o barulho
+     *  do tiro, fazendo com que o jogo acabe.
+     */
+    public String atirarNaSala(){
+        return "Você atira às cegas em direção a porta da " + this.getDescricao() +
+                    ".\n Após o estouro da arma, seus ovidos zunem por um breve momento.\n "+
+                    "Sua audição volta logo a tempo de ouvir o os de cascos pesados rapidamente se aproximando de você.\n"+
+                    "Mal tendo tempo de localizar de qual porta vem o som, você é atingido pelas costas por uma terrível besta e perde imediatamente a consiência.";
+        
+    }
 }
