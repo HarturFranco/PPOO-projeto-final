@@ -33,8 +33,8 @@ public class Sala
 
     /**
      * Define uma saida desse ambiente
-     * @param numero,  cordenada de uma saida.
-     * @param vizinho O ambiente na direcao dada
+     * @param cordenada,  cordenada de uma saida.
+     * @param adjacente O ambiente na direcao dada
      */
     public void adicionarSaida(String cordenada, Sala adjacente)
     {
