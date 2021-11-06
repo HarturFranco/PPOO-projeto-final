@@ -45,17 +45,17 @@ public class Jogo
         
         // inicializa as saidas dos ambientes
         // saidas fora
-        fora.ajustarSaida("leste", anfiteatro);
-        fora.ajustarSaida("sul", laboratorio);
-        fora.ajustarSaida("oeste", cantina);
+        fora.adicionarSaida("leste", anfiteatro);
+        fora.adicionarSaida("sul", laboratorio);
+        fora.adicionarSaida("oeste", cantina);
         // saidas anfiteatro
-        anfiteatro.ajustarSaida("oeste", fora);
+        anfiteatro.adicionarSaida("oeste", fora);
         // saidas cantina
-        cantina.ajustarSaida("leste", fora);
+        cantina.adicionarSaida("leste", fora);
         // saidas laboratorio
-        laboratorio.ajustarSaida("norte", fora);
-        laboratorio.ajustarSaida("leste", escritorio);
-        escritorio.ajustarSaida("oeste", laboratorio);
+        laboratorio.adicionarSaida("norte", fora);
+        laboratorio.adicionarSaida("leste", escritorio);
+        escritorio.adicionarSaida("oeste", laboratorio);
 
         salaAtual = fora;  // o jogo comeca do lado de fora
     }
@@ -81,19 +81,8 @@ public class Jogo
     private void imprimirInformacaoSobreAmbiente(){
         System.out.println("Voce esta " + salaAtual.getDescricao());
 
-        System.out.print("Saidas: ");
-        if(salaAtual.getSaida("norte") != null) {
-            System.out.print("norte ");
-        }
-        if(salaAtual.getSaida("leste") != null) {
-            System.out.print("leste ");
-        }
-        if(salaAtual.getSaida("leste") != null) {
-            System.out.print("sul ");
-        }
-        if(salaAtual.getSaida("leste") != null) {
-            System.out.print("oeste ");
-        }
+        System.out.print("Saidas: " + salaAtual.getSaidaString());
+
         System.out.println();
     }
 
@@ -148,11 +137,9 @@ public class Jogo
      */
     private void imprimirAjuda() 
     {
-        System.out.println("Voce esta perdido. Voce esta sozinho. Voce caminha");
-        System.out.println("pela universidade.");
-        System.out.println();
+        // TODO - possivel mudança para gui, chamar gui.
         System.out.println("Suas palavras de comando sao:");
-        System.out.println("   ir sair ajuda");
+        analisador.mostrarComandos();
     }
 
     /** 

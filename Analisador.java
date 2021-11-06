@@ -63,4 +63,11 @@ public class Analisador
             return new Comando(null, palavra2); 
         }
     }
+
+    /**
+     * Imprime uma lista com os comandos validos
+     */
+    public void mostrarComandos() {
+        palavrasDeComando.mostraTodos();
+    }
 }

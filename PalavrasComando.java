@@ -38,4 +38,19 @@ public class PalavrasComando
         // se chegamos aqui, a string nao foi encontrada nos comandos.
         return false;
     }
+
+    /**
+    * Imprime todos os comandos validos.
+    */
+    public void mostraTodos(){
+        // TODO - Com a interface isso aqui vai chamar a interface e printar no campo.
+        // ou retornar a string pra que a classe jogo chame a interface
+
+        for(String comando : comandosValidos){
+            System.out.print(comando + " ");
+        }
+        System.out.println();
+    }
+
+
 }
