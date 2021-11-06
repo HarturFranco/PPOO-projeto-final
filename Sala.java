@@ -15,10 +15,10 @@ import java.util.HashMap;
  * @author  Michael Kölling and David J. Barnes (traduzido por Julio Cesar Alves)
  * @version 2011.07.31 (2016.02.01)
  */
-public class Ambiente 
+public class Sala
 {
     private String descricao;
-    HashMap<String, Ambiente> saidas;
+    HashMap<String, Sala> saidas;
 
     /**
      * Cria um ambiente com a "descricao" passada. Inicialmente, ele
@@ -29,7 +29,7 @@ public class Ambiente
      * "um jardim aberto".
      * @param descricao A descricao do ambiente.
      */
-    public Ambiente(String descricao) 
+    public Sala(String descricao)
     {
         this.descricao = descricao;
         saidas = new HashMap<>();
@@ -40,7 +40,7 @@ public class Ambiente
      * @param direcao A direcao da saida.
      * @param vizinho O ambiente na direcao dada
      */
-    public void ajustarSaida(String direcao, Ambiente vizinho)
+    public void ajustarSaida(String direcao, Sala vizinho)
     {
         saidas.put(direcao, vizinho);
     }
@@ -60,7 +60,7 @@ public class Ambiente
      * @param direcao A direção da saida.
      * @return O Ambiente em dada direção.
      */
-    public Ambiente getSaida(String direcao){
+    public Sala getSaida(String direcao){
         return saidas.get(direcao);
     }
 

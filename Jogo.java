@@ -18,7 +18,7 @@
 public class Jogo 
 {
     private Analisador analisador;
-    private Ambiente ambienteAtual;
+    private Sala salaAtual;
         
     /**
      * Cria o jogo e incializa seu mapa interno.
@@ -34,14 +34,14 @@ public class Jogo
      */
     private void criarAmbientes()
     {
-        Ambiente fora, anfiteatro, cantina, laboratorio, escritorio;
+        Sala fora, anfiteatro, cantina, laboratorio, escritorio;
       
         // cria os ambientes
-        fora = new Ambiente("do lado de fora da entrada principal de uma universidade");
-        anfiteatro = new Ambiente("no anfiteatro");
-        cantina = new Ambiente("na cantina do campus");
-        laboratorio = new Ambiente("no laboratorio de computacao");
-        escritorio = new Ambiente("na sala de administracao dos computadores");
+        fora = new Sala("do lado de fora da entrada principal de uma universidade");
+        anfiteatro = new Sala("no anfiteatro");
+        cantina = new Sala("na cantina do campus");
+        laboratorio = new Sala("no laboratorio de computacao");
+        escritorio = new Sala("na sala de administracao dos computadores");
         
         // inicializa as saidas dos ambientes
         // saidas fora
@@ -57,7 +57,7 @@ public class Jogo
         laboratorio.ajustarSaida("leste", escritorio);
         escritorio.ajustarSaida("oeste", laboratorio);
 
-        ambienteAtual = fora;  // o jogo comeca do lado de fora
+        salaAtual = fora;  // o jogo comeca do lado de fora
     }
 
     /**
@@ -79,19 +79,19 @@ public class Jogo
     }
 
     private void imprimirInformacaoSobreAmbiente(){
-        System.out.println("Voce esta " + ambienteAtual.getDescricao());
+        System.out.println("Voce esta " + salaAtual.getDescricao());
 
         System.out.print("Saidas: ");
-        if(ambienteAtual.getSaida("norte") != null) {
+        if(salaAtual.getSaida("norte") != null) {
             System.out.print("norte ");
         }
-        if(ambienteAtual.getSaida("leste") != null) {
+        if(salaAtual.getSaida("leste") != null) {
             System.out.print("leste ");
         }
-        if(ambienteAtual.getSaida("leste") != null) {
+        if(salaAtual.getSaida("leste") != null) {
             System.out.print("sul ");
         }
-        if(ambienteAtual.getSaida("leste") != null) {
+        if(salaAtual.getSaida("leste") != null) {
             System.out.print("oeste ");
         }
         System.out.println();
@@ -170,13 +170,13 @@ public class Jogo
         String direcao = comando.getSegundaPalavra();
 
         // Tenta sair do ambiente atual
-        Ambiente proximoAmbiente = ambienteAtual.getSaida(direcao);
+        Sala proximoSala = salaAtual.getSaida(direcao);
 
-        if (proximoAmbiente == null) {
+        if (proximoSala == null) {
             System.out.println("Nao ha passagem!");
         }
         else {
-            ambienteAtual = proximoAmbiente;
+            salaAtual = proximoSala;
 
             imprimirInformacaoSobreAmbiente();
         }
