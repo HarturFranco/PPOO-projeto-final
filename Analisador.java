@@ -54,20 +54,16 @@ public class Analisador
             }
         }
 
-        // Agora verifica se esta palavra eh conhecida. Se for, cria um
-        // com ela. Se nao, cria um comando "null" (para comando desconhecido)
-        if(palavrasDeComando.ehComando(palavra1)) {
-            return new Comando(palavra1, palavra2);
-        }
-        else {
-            return new Comando(null, palavra2); 
-        }
+
+        // cria um comando, se a palavra1, DESCONHECIDO se desconhecido
+        return new Comando(palavrasDeComando.getPalavraComando(palavra1), palavra2);
     }
 
     /**
-     * Imprime uma lista com os comandos validos
+     * Produz uma string com a lista de todos os comandos validos
+     * @return uma String com todos comandos separados por espaco.
      */
-    public void mostrarComandos() {
-        palavrasDeComando.mostraTodos();
+    public String getComandos() {
+        return palavrasDeComando.getListaComandos();
     }
 }

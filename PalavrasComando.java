@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 /**
  * Esta classe eh parte da aplicacao "World of Zuul".
  * "World of Zuul" eh um jogo de aventura muito simples, baseado em texto.  
@@ -12,9 +14,7 @@
 public class PalavrasComando
 {
     // um vetor constante que guarda todas as palavras de comandos validas
-    private static final String[] comandosValidos = {
-        "ir", "sair", "ajuda"
-    };
+    private HashMap<String, PalavraComando> comandosValidos;
 
     /**
      * Construtor - inicializa as palavras de comando.
@@ -22,7 +22,31 @@ public class PalavrasComando
     public PalavrasComando()
     {
         // nada a fazer no momento...
+        comandosValidos = new HashMap<>();
+        comandosValidos.put("IR", PalavraComando.IR);
+        comandosValidos.put("AJUDA", PalavraComando.AJUDA);
+        comandosValidos.put("SAIR", PalavraComando.SAIR);
     }
+
+
+    /**
+     * Encontra a PalavraCOmando associada a palavradocomando.
+     * @param palavradocomando A palavra a ser procurada (string).
+     * @return a PalavraConabdi correspondente a palavradocomando, ou DESCONHECIDO
+     *         se nao for uma palavra vailida.
+     */
+    public PalavraComando getPalavraComando(String palavradocomando)
+    {
+        PalavraComando commando = comandosValidos.get(palavradocomando);
+        if(commando != null) {
+            return commando;
+        }
+        else {
+            return PalavraComando.DESCONHECIDO;
+        }
+    }
+
+
 
     /**
      * Verifica se uma dada String eh uma palavra de comando valida. 
@@ -31,25 +55,21 @@ public class PalavrasComando
      */
     public boolean ehComando(String umaString)
     {
-        for(int i = 0; i < comandosValidos.length; i++) {
-            if(comandosValidos[i].equals(umaString))
-                return true;
-        }
-        // se chegamos aqui, a string nao foi encontrada nos comandos.
-        return false;
+        return comandosValidos.containsKey(umaString);
     }
 
     /**
-    * Imprime todos os comandos validos.
-    */
-    public void mostraTodos(){
+     * Produz uma String com a lista com os comandos validos.
+     * @return uma String com todos comandos separados por espaco.
+     */
+    public String getListaComandos(){
         // TODO - Com a interface isso aqui vai chamar a interface e printar no campo.
         // ou retornar a string pra que a classe jogo chame a interface
-
-        for(String comando : comandosValidos){
-            System.out.print(comando + " ");
+        String listaComandos = "";
+        for(String comando : comandosValidos.keySet()){
+            listaComandos += comando + " ";
         }
-        System.out.println();
+        return listaComandos;
     }
 
 

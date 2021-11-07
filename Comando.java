@@ -19,19 +19,19 @@
 
 public class Comando
 {
-    private String palavraDeComando;
+    private PalavraComando palavraDeComando;
     private String segundaPalavra;
 
     /**
      * Cria um objeto comando. Primeira e segunda palavra devem ser 
-     * fornecidas, mas qualquer uma (ou ambas) podem ser null.
-     * @param primeiraPalavra A primeira palavra do comando. Null se
+     * fornecidas, a segunda pode ser null.
+     * @param palavraDeComando A palavra do comando. DESCONHECIDO se
      * 						  o comando nao foi reconhecido
-     * @param segundaPalavra A segunda palavra do comando.
+     * @param segundaPalavra A segunda palavra do comando, pode ser null.
      */
-    public Comando(String primeiraPalavra, String segundaPalavra)
+    public Comando(PalavraComando palavraDeComando, String segundaPalavra)
     {
-        palavraDeComando = primeiraPalavra;
+        this.palavraDeComando = palavraDeComando;
         this.segundaPalavra = segundaPalavra;
     }
 
@@ -40,7 +40,7 @@ public class Comando
      * Se o comando nao foi entendido, o resultado eh null.
      * @return A palavra de comando.
      */
-    public String getPalavraDeComando()
+    public PalavraComando getPalavraDeComando()
     {
         return palavraDeComando;
     }
@@ -59,7 +59,7 @@ public class Comando
      */
     public boolean ehDesconhecido()
     {
-        return (palavraDeComando == null);
+        return (palavraDeComando == PalavraComando.DESCONHECIDO);
     }
 
     /**

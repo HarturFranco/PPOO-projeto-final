@@ -109,20 +109,21 @@ public class Jogo
     {
         boolean querSair = false;
 
-        if(comando.ehDesconhecido()) {
-            System.out.println("Eu nao entendi o que voce disse...");
-            return false;
-        }
+        PalavraComando palavraComando = comando.getPalavraDeComando();
 
-        String palavraDeComando = comando.getPalavraDeComando();
-        if (palavraDeComando.equals("ajuda")) {
-            imprimirAjuda();
-        }
-        else if (palavraDeComando.equals("ir")) {
-            irParaAmbiente(comando);
-        }
-        else if (palavraDeComando.equals("sair")) {
-            querSair = sair(comando);
+        switch (palavraComando){
+            case DESCONHECIDO:
+                System.out.println("Eu nao entendi o que voce disse...");
+                break;
+            case AJUDA:
+                imprimirAjuda();
+                break;
+            case IR:
+                irParaAmbiente(comando);
+                break;
+            case SAIR:
+                querSair = sair(comando);
+                break;
         }
 
         return querSair;
@@ -139,7 +140,7 @@ public class Jogo
     {
         // TODO - possivel mudança para gui, chamar gui.
         System.out.println("Suas palavras de comando sao:");
-        analisador.mostrarComandos();
+        System.out.println(analisador.getComandos());
     }
 
     /** 
