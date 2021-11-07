@@ -1,5 +1,24 @@
 public enum PalavraComando
 {
-    // A value for each command word, plus one for unrecognized commands.
-    IR, SAIR, AJUDA, DESCONHECIDO
+    // Um valor para cada palavra de comando
+    // com a string da interface correspondente.
+    IR("ir"), SAIR("sair"), AJUDA("ajuda"), DESCONHECIDO("?");
+
+    // A string comando
+    private String stringComando;
+
+    /**
+     * Inicializa com a string comando correspondente.
+     * @param stringComando A String Com o Comando
+     */
+    PalavraComando(String stringComando){
+        this.stringComando = stringComando;
+    }
+
+    /**
+     * @return A PalavraComando como String.
+     */
+    public String toString() {
+        return stringComando;
+    }
 }

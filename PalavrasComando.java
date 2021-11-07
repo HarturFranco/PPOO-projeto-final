@@ -21,11 +21,12 @@ public class PalavrasComando
      */
     public PalavrasComando()
     {
-        // nada a fazer no momento...
-        comandosValidos = new HashMap<>();
-        comandosValidos.put("IR", PalavraComando.IR);
-        comandosValidos.put("AJUDA", PalavraComando.AJUDA);
-        comandosValidos.put("SAIR", PalavraComando.SAIR);
+        comandosValidos = new HashMap<String, PalavraComando>();
+        for(PalavraComando commando : PalavraComando.values()) {
+            if(commando != PalavraComando.DESCONHECIDO) {
+                comandosValidos.put(commando.toString(), commando);
+            }
+        }
     }
 
 
