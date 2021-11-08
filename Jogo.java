@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  *  Essa eh a classe principal da aplicacao "World of Zull".
  *  "World of Zuul" eh um jogo de aventura muito simples, baseado em texto.
@@ -19,24 +23,31 @@ public class Jogo
 {
     private Analisador analisador;
     private Jogador jogador;
-        
+    // TODO - Classe Mapa: Guarda todas salas e salas marcadas (Item do jogador)?
+    private HashMap<String, Boolean> todasSalas;
     /**
      * Cria o jogo e incializa seu mapa interno.
      */
     public Jogo() 
     {
         jogador = new Jogador();
-        criarAmbientes();
+
         analisador = new Analisador();
+        // TODO - Classe Mapa: Guarda todas salas e salas marcadas (Item do jogador)?
+        todasSalas = new HashMap<>();
+        criarSalas();
     }
 
     /**
-     * Cria todos os ambientes e liga as saidas deles
+     * Cria todos as Salas e liga as saidas deles
      */
-    private void criarAmbientes()
+    private void criarSalas()
     {
+        /** TODO: Criar Ambiente por arquivo Texto
+         *  TODO: Passar todas as salas para todasSalas com valor booleano false (nao marcadas)
+         */
         Sala fora, anfiteatro, cantina, laboratorio, escritorio;
-      
+        todasSalas.put("10", false);
         // cria os ambientes
         fora = new Sala("do lado de fora da entrada principal de uma universidade");
         anfiteatro = new Sala("no anfiteatro");
@@ -126,12 +137,82 @@ public class Jogo
             case IR:
                 irParaAmbiente(comando);
                 break;
+            case FUGIR:
+                // TODO - Usar Excecao aqui?
+                System.out.println("Fugir");
+                fugir(comando);
+                break;
+            case MARCAR:
+                // TODO - Usar Excecao aqui?
+                marcarSala(comando);
+                break;
+            case ATIRAR:
+                // TODO - Implementar Atirar (sala)
+                System.out.println("Atirar " + comando.getSegundaPalavra());
+                break;
             case SAIR:
                 querSair = sair(comando);
                 break;
         }
 
         return querSair;
+    }
+    /**
+     *
+     * Marca a sala passada por comando
+     */
+    private void marcarSala(Comando comando) {
+        //
+        if(!comando.temSegundaPalavra()) {
+            System.out.println("Marcar qual(is) Salas?");
+        }
+        else {
+            String segundaPalavra = comando.getSegundaPalavra();
+            // Verifica se a Sala passada existe
+            if(todasSalas.containsKey(segundaPalavra)){
+                todasSalas.put(segundaPalavra, true);
+                System.out.println("Sala " + segundaPalavra + " marcada!");
+                // TODO - Atualizar texto com Salas marcadas.
+                imprimirSalasMarcadas();
+            } else{
+                System.out.println("Sala Nao Existe, por favor verifique o mapa e entre com uma sala valida");
+            }
+        }
+
+    }
+
+    /**
+     *
+     * Marca a sala passada por comando
+     */
+    private void imprimirSalasMarcadas() {
+        String salasMarcadas = "";
+        for(Map.Entry<String, Boolean> entry : todasSalas.entrySet()){
+            if(entry.getValue().equals(true)){
+                salasMarcadas += entry.getKey() + " ";
+            }
+        }
+        if(!salasMarcadas.equals("")){
+            System.out.print("As Salas Marcadas: ");
+            System.out.println(salasMarcadas);
+        }
+
+    }
+
+    /**
+     *
+     * executa a acao de fugir pelo jogador
+     */
+    private void fugir(Comando comando) {
+        //  TODO - Usar Excecao aqui?
+        //  TODO - Mudar Texto.
+        if(jogador.fugir()){
+            System.out.println("Você conseguiu Sair da Masmorra, parabéns!!!!");
+            // TODO - Finalizar programa.
+        } else {
+            System.out.println("Você nao pode fugir!");
+
+        }
     }
 
     // Implementacoes dos comandos do usuario

@@ -31,7 +31,7 @@ public class Jogador {
         this.salaAtual = salaAtual;
     }
 
-    // TODO - Retornar Copia do objeto?
+    // TODO - Retornar Copia do objeto para manter encapsulamento?
     public Sala getSalaAtual() {
         return salaAtual;
     }
@@ -45,6 +45,13 @@ public class Jogador {
     }
 
 
-
-
+    public boolean fugir() {
+        // TODO - Usar Excecao?
+        if(temChave()){
+            if(salaAtual instanceof SalaSaida){
+                return true;
+            }
+        }
+        return false;
+    }
 }
