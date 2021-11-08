@@ -58,6 +58,18 @@ public class Jogador {
         }
     }
 
+    public String entrar(String direcao){
+        Sala proximaSala = salaAtual.getSaida(direcao);
+
+        if (proximaSala == null) {
+            return "Não há passagem!";
+        }
+        else {
+            salaAtual = proximaSala;
+            return salaAtual.entrarNaSala();
+        }
+    }
+
     public boolean fugir() {
         // TODO - Usar Excecao?
         if(temChave()){

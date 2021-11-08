@@ -212,7 +212,6 @@ public class Jogo
             // TODO - Finalizar programa.
         } else {
             System.out.println("Você nao pode fugir!");
-
         }
     }
 
@@ -239,21 +238,9 @@ public class Jogo
         if(!comando.temSegundaPalavra()) {
             // se nao ha segunda palavra, nao sabemos pra onde ir...
             System.out.println("Ir pra onde?");
-            return;
-        }
-
-        String direcao = comando.getSegundaPalavra();
-
-        // Tenta sair do ambiente atual
-        Sala proximoSala = jogador.getSalaAtual().getSaida(direcao);
-
-        if (proximoSala == null) {
-            System.out.println("Nao ha passagem!");
-        }
-        else {
-            jogador.setSalaAtual(proximoSala);
-
-            imprimirInformacaoSobreAmbiente();
+        }else{
+            String direcao = comando.getSegundaPalavra();
+            System.out.println(jogador.entrar(direcao));
         }
     }
     
