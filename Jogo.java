@@ -128,28 +128,30 @@ public class Jogo
         PalavraComando palavraComando = comando.getPalavraDeComando();
 
         switch (palavraComando){
-            case DESCONHECIDO:
-                System.out.println("Eu nao entendi o que voce disse...");
-                break;
             case AJUDA:
                 imprimirAjuda();
                 break;
-            case IR:
-                irParaAmbiente(comando);
+            case ATIRAR:
+                // TODO - Implementar Atirar (sala)
+                atirar(comando);
+                break;
+            case DESCONHECIDO:
+                System.out.println("Eu nao entendi o que voce disse...");
+                break;
+            case DESMARCAR:
+                desmarcarSala(comando);
                 break;
             case FUGIR:
                 // TODO - Usar Excecao aqui?
                 System.out.println("Fugir");
                 fugir(comando);
                 break;
+            case IR:
+                irParaAmbiente(comando);
+                break;
             case MARCAR:
                 // TODO - Usar Excecao aqui?
                 marcarSala(comando);
-                break;
-            case ATIRAR:
-                // TODO - Implementar Atirar (sala)
-                System.out.println("Atirar " + comando.getSegundaPalavra());
-                
                 break;
             case SAIR:
                 querSair = sair(comando);
@@ -179,12 +181,34 @@ public class Jogo
                 System.out.println("Sala Nao Existe, por favor verifique o mapa e entre com uma sala valida");
             }
         }
-
     }
-
+    
     /**
      *
-     * Marca a sala passada por comando
+     * Desmarca a sala passada por comando
+     */
+    private void desmarcarSala(Comando comando) {
+        //
+        if(!comando.temSegundaPalavra()) {
+            System.out.println("Marcar qual(is) Salas?");
+        }
+        else {
+            String segundaPalavra = comando.getSegundaPalavra();
+            // Verifica se a Sala passada existe
+            if(todasSalas.containsKey(segundaPalavra)){
+                jogador.desmarcarSala(segundaPalavra);
+                System.out.println("Sala " + segundaPalavra + " desmarcada!");
+                // TODO - Atualizar texto com Salas marcadas.
+                imprimirSalasMarcadas();
+            } else{
+                System.out.println("Sala Nao Existe, por favor verifique o mapa e entre com uma sala valida");
+            }
+        }
+    }
+    
+    /**
+     *
+     * Imprime todas as salas marcadas pelo jogador
      */
     private void imprimirSalasMarcadas() {
         String salasMarcadas = "";
@@ -247,8 +271,8 @@ public class Jogo
     
     
     /** 
-     * Tenta ir em uma direcao. Se existe uma saida entra no 
-     * novo ambiente, caso contrario imprime mensagem de erro.
+     * Tenta atirar em direção a uma sala, se houver uma
+     * conexao entre as salas, atira, senão envia um erro.
      */
     private void atirar(Comando comando) 
     {

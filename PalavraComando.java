@@ -2,7 +2,7 @@ public enum PalavraComando
 {
     // Um valor para cada palavra de comando
     // com a string da interface correspondente.
-    IR("ir"), SAIR("sair"), AJUDA("ajuda"), FUGIR("fugir"), ATIRAR("atirar"), MARCAR("marcar"), DESCONHECIDO("?");
+    IR("ir"), SAIR("sair"), AJUDA("ajuda"), FUGIR("fugir"), ATIRAR("atirar"), MARCAR("marcar"), DESMARCAR("desmarcar"), DESCONHECIDO("?");
 
     // A string comando
     private String stringComando;

@@ -77,6 +77,10 @@ public class Jogador {
         salasMarcadas.add(codSala);
     }
     
+    public void desmarcarSala(String codSala){
+        salasMarcadas.remove(codSala);
+    }
+    
     public ArrayList<String> getMarcadas (){
         return this.salasMarcadas;
     }
