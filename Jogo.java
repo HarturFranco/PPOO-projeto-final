@@ -24,7 +24,7 @@ public class Jogo
     private Analisador analisador;
     private Jogador jogador;
     // TODO - Classe Mapa: Guarda todas salas e salas marcadas (Item do jogador)?
-    private HashMap<String, Boolean> todasSalas;
+    private HashMap<String, Sala> todasSalas;
     /**
      * Cria o jogo e incializa seu mapa interno.
      */
@@ -47,7 +47,6 @@ public class Jogo
          *  TODO: Passar todas as salas para todasSalas com valor booleano false (nao marcadas)
          */
         Sala fora, anfiteatro, cantina, laboratorio, escritorio;
-        todasSalas.put("10", false);
         // cria os ambientes
         fora = new Sala("do lado de fora da entrada principal de uma universidade");
         anfiteatro = new Sala("no anfiteatro");
@@ -68,7 +67,8 @@ public class Jogo
         laboratorio.adicionarSaida("norte", fora);
         laboratorio.adicionarSaida("leste", escritorio);
         escritorio.adicionarSaida("oeste", laboratorio);
-
+        
+        todasSalas.put("10", fora);
         jogador.setSalaAtual(fora);
         //salaAtual = fora;  // o jogo comeca do lado de fora
     }
@@ -171,7 +171,7 @@ public class Jogo
             String segundaPalavra = comando.getSegundaPalavra();
             // Verifica se a Sala passada existe
             if(todasSalas.containsKey(segundaPalavra)){
-                todasSalas.put(segundaPalavra, true);
+                jogador.marcarSala(segundaPalavra);
                 System.out.println("Sala " + segundaPalavra + " marcada!");
                 // TODO - Atualizar texto com Salas marcadas.
                 imprimirSalasMarcadas();
@@ -188,11 +188,12 @@ public class Jogo
      */
     private void imprimirSalasMarcadas() {
         String salasMarcadas = "";
-        for(Map.Entry<String, Boolean> entry : todasSalas.entrySet()){
-            if(entry.getValue().equals(true)){
-                salasMarcadas += entry.getKey() + " ";
-            }
+        ArrayList<String> marcadas = jogador.getMarcadas(); 
+        
+        for(String marcada: marcadas){
+            salasMarcadas += marcada;
         }
+        
         if(!salasMarcadas.equals("")){
             System.out.print("As Salas Marcadas: ");
             System.out.println(salasMarcadas);

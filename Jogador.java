@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * Classe Jogador - um Jogador em um jogo adventure.
  *
@@ -17,7 +19,8 @@ public class Jogador {
 
     private boolean chave;
     private boolean arma;
-    private Sala salaAtual;
+    private Sala salaAtual;    
+    private ArrayList<String> salasMarcadas;
 
     public Jogador() {
         this.chave = chave;
@@ -68,6 +71,14 @@ public class Jogador {
             salaAtual = proximaSala;
             return salaAtual.entrarNaSala();
         }
+    }
+    
+    public void marcarSala(String codSala){
+        salasMarcadas.add(codSala);
+    }
+    
+    public ArrayList<String> getMarcadas (){
+        return this.salasMarcadas;
     }
 
     public boolean fugir() {
