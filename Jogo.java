@@ -18,13 +18,14 @@
 public class Jogo 
 {
     private Analisador analisador;
-    private Sala salaAtual;
+    private Jogador jogador;
         
     /**
      * Cria o jogo e incializa seu mapa interno.
      */
     public Jogo() 
     {
+        jogador = new Jogador();
         criarAmbientes();
         analisador = new Analisador();
     }
@@ -57,7 +58,8 @@ public class Jogo
         laboratorio.adicionarSaida("leste", escritorio);
         escritorio.adicionarSaida("oeste", laboratorio);
 
-        salaAtual = fora;  // o jogo comeca do lado de fora
+        jogador.setSalaAtual(fora);
+        //salaAtual = fora;  // o jogo comeca do lado de fora
     }
 
     /**
@@ -78,10 +80,13 @@ public class Jogo
         System.out.println("Obrigado por jogar. Ate mais!");
     }
 
+    /**
+     * Imprime informacoes sobre o ambiente atual.
+     */
     private void imprimirInformacaoSobreAmbiente(){
-        System.out.println("Voce esta " + salaAtual.getDescricao());
+        System.out.println("Voce esta " + jogador.getSalaAtual().getDescricao());
 
-        System.out.print("Saidas: " + salaAtual.getSaidaString());
+        System.out.print("Saidas: " + jogador.getSalaAtual().getSaidaString());
 
         System.out.println();
     }
@@ -158,13 +163,13 @@ public class Jogo
         String direcao = comando.getSegundaPalavra();
 
         // Tenta sair do ambiente atual
-        Sala proximoSala = salaAtual.getSaida(direcao);
+        Sala proximoSala = jogador.getSalaAtual().getSaida(direcao);
 
         if (proximoSala == null) {
             System.out.println("Nao ha passagem!");
         }
         else {
-            salaAtual = proximoSala;
+            jogador.setSalaAtual(proximoSala);
 
             imprimirInformacaoSobreAmbiente();
         }
