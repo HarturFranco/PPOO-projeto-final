@@ -149,6 +149,7 @@ public class Jogo
             case ATIRAR:
                 // TODO - Implementar Atirar (sala)
                 System.out.println("Atirar " + comando.getSegundaPalavra());
+                
                 break;
             case SAIR:
                 querSair = sair(comando);
@@ -255,6 +256,24 @@ public class Jogo
             imprimirInformacaoSobreAmbiente();
         }
     }
+    
+    
+    /** 
+     * Tenta ir em uma direcao. Se existe uma saida entra no 
+     * novo ambiente, caso contrario imprime mensagem de erro.
+     */
+    private void atirar(Comando comando) 
+    {
+        if(!comando.temSegundaPalavra()) {
+            // se nao ha segunda palavra, nao sabemos pra onde atirar..
+            System.out.println("Artirar no quê?");
+        }
+        else{
+            String direcao = comando.getSegundaPalavra();
+            jogador.atirar(direcao);
+        }
+    }
+
 
     /** 
      * "Sair" foi digitado. Verifica o resto do comando pra ver

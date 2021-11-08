@@ -44,6 +44,19 @@ public class Jogador {
         return arma;
     }
 
+    public String atirar(String direcao){
+        Sala alvo = salaAtual.getSaida( direcao);
+        
+        if( !this.arma){
+            return "A sua arma não tem mais balas";
+        }
+        else if(alvo == null){
+            return "Você não tem acesso a essa sala.";
+        }
+        else{
+            return alvo.atirarNaSala();
+        }
+    }
 
     public boolean fugir() {
         // TODO - Usar Excecao?
