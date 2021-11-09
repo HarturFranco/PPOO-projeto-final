@@ -157,7 +157,10 @@ public class Jogo
                 querSair = sair(comando);
                 break;
         }
-
+        if( !jogador.estaVivo()){
+            querSair = true;
+            System.out.println("GAME OVER!");
+        }
         return querSair;
     }
     /**
