@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.security.InvalidParameterException;
 
 /**
  *  Essa eh a classe principal da aplicacao "World of Zull".
@@ -24,7 +25,6 @@ public class Jogo
     private Analisador analisador;
     private Jogador jogador;
     // TODO - Classe Mapa: Guarda todas salas e salas marcadas (Item do jogador)?
-    private HashMap<String, Sala> todasSalas;
     /**
      * Cria o jogo e incializa seu mapa interno.
      */
@@ -34,7 +34,6 @@ public class Jogo
 
         analisador = new Analisador();
         // TODO - Classe Mapa: Guarda todas salas e salas marcadas (Item do jogador)?
-        todasSalas = new HashMap<>();
         criarSalas();
     }
 
@@ -68,7 +67,6 @@ public class Jogo
         laboratorio.adicionarSaida("leste", escritorio);
         escritorio.adicionarSaida("oeste", laboratorio);
         
-        todasSalas.put("10", fora);
         jogador.setSalaAtual(fora);
         //salaAtual = fora;  // o jogo comeca do lado de fora
     }
@@ -85,8 +83,13 @@ public class Jogo
                 
         boolean terminado = false;
         while (! terminado) {
-            Comando comando = analisador.pegarComando();
-            terminado = processarComando(comando);
+            try{
+                Comando comando = analisador.pegarComando();
+                terminado = processarComando(comando);
+            }
+            catch(InvalidParameterException e){
+                System.out.println(e.getMessage());
+            }
         }
         System.out.println("Obrigado por jogar. Ate mais!");
     }
@@ -163,6 +166,7 @@ public class Jogo
         }
         return querSair;
     }
+    
     /**
      *
      * Marca a sala passada por comando
@@ -170,20 +174,15 @@ public class Jogo
     private void marcarSala(Comando comando) {
         //
         if(!comando.temSegundaPalavra()) {
-            System.out.println("Marcar qual(is) Salas?");
+            throw new InvalidParameterException("Marcar qual(is) Salas?");
         }
-        else {
-            String segundaPalavra = comando.getSegundaPalavra();
-            // Verifica se a Sala passada existe
-            if(todasSalas.containsKey(segundaPalavra)){
-                jogador.marcarSala(segundaPalavra);
-                System.out.println("Sala " + segundaPalavra + " marcada!");
-                // TODO - Atualizar texto com Salas marcadas.
-                imprimirSalasMarcadas();
-            } else{
-                System.out.println("Sala Nao Existe, por favor verifique o mapa e entre com uma sala valida");
-            }
-        }
+        String segundaPalavra = comando.getSegundaPalavra();
+        
+        
+        jogador.marcarSala(segundaPalavra);
+        System.out.println("Sala " + segundaPalavra + " marcada!");
+        
+        imprimirSalasMarcadas();
     }
     
     /**
@@ -193,20 +192,14 @@ public class Jogo
     private void desmarcarSala(Comando comando) {
         //
         if(!comando.temSegundaPalavra()) {
-            System.out.println("Marcar qual(is) Salas?");
+            throw new InvalidParameterException("Marcar qual(is) Salas?");
         }
-        else {
-            String segundaPalavra = comando.getSegundaPalavra();
-            // Verifica se a Sala passada existe
-            if(todasSalas.containsKey(segundaPalavra)){
-                jogador.desmarcarSala(segundaPalavra);
-                System.out.println("Sala " + segundaPalavra + " desmarcada!");
-                // TODO - Atualizar texto com Salas marcadas.
-                imprimirSalasMarcadas();
-            } else{
-                System.out.println("Sala Nao Existe, por favor verifique o mapa e entre com uma sala valida");
-            }
-        }
+        String segundaPalavra = comando.getSegundaPalavra();
+        
+        jogador.desmarcarSala(segundaPalavra);
+        System.out.println("Sala " + segundaPalavra + " desmarcada!");
+        
+        imprimirSalasMarcadas();
     }
     
     /**
@@ -225,7 +218,6 @@ public class Jogo
             System.out.print("As Salas Marcadas: ");
             System.out.println(salasMarcadas);
         }
-
     }
 
     /**
@@ -265,11 +257,10 @@ public class Jogo
     {
         if(!comando.temSegundaPalavra()) {
             // se nao ha segunda palavra, nao sabemos pra onde ir...
-            System.out.println("Ir pra onde?");
-        }else{
-            String direcao = comando.getSegundaPalavra();
-            System.out.println(jogador.entrar(direcao));
+            throw new InvalidParameterException("Ir pra onde?");
         }
+        String direcao = comando.getSegundaPalavra();
+        System.out.println(jogador.entrar(direcao));
     }
     
     
@@ -281,12 +272,10 @@ public class Jogo
     {
         if(!comando.temSegundaPalavra()) {
             // se nao ha segunda palavra, nao sabemos pra onde atirar..
-            System.out.println("Artirar no quê?");
+            throw new InvalidParameterException("Artirar no quê?");
         }
-        else{
-            String direcao = comando.getSegundaPalavra();
-            jogador.atirar(direcao);
-        }
+        String direcao = comando.getSegundaPalavra();
+        jogador.atirar(direcao);
     }
 
 
@@ -298,11 +287,8 @@ public class Jogo
     private boolean sair(Comando comando) 
     {
         if(comando.temSegundaPalavra()) {
-            System.out.println("Sair o que?");
-            return false;
+            throw new InvalidParameterException("Sair o que?");
         }
-        else {
-            return true;  // sinaliza que nos queremos sair
-        }
+        return true;  // sinaliza que nos queremos sair
     }
 }

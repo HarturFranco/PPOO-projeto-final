@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.security.InvalidParameterException;
 
 /**
  * Classe Jogador - um Jogador em um jogo adventure.
@@ -21,12 +22,13 @@ public class Jogador {
     private boolean chave;
     private boolean arma;
     private Sala salaAtual;    
-    private ArrayList<String> salasMarcadas;
+    private Mapa mapa;
 
-    public Jogador() {
+    public Jogador(Mapa mapa) {
         this.chave = false;
         this.arma = true;
         this.vivo = true;
+        this.mapa = mapa;
         //TODO - Receber salaAtual?
         this.salaAtual = null;
     }
@@ -54,6 +56,10 @@ public class Jogador {
     }
 
     public String atirar(String direcao){
+        if( !mapa.existeSala(direcao)){
+            throw new InvalidParameterException("Essa sala não existe!");
+        }
+        
         Sala alvo = salaAtual.getSaida( direcao);
         
         if(alvo == null){
@@ -69,10 +75,14 @@ public class Jogador {
     }
 
     public String entrar(String direcao){
+        if( !mapa.existeSala(direcao)){
+            throw new InvalidParameterException("Essa sala não existe!");
+        }
+        
         Sala proximaSala = salaAtual.getSaida(direcao);
 
         if (proximaSala == null) {
-            return "Não há passagem!";
+            return "Você não tem acesso a essa sala.";
         }
         else {
             salaAtual = proximaSala;
@@ -81,15 +91,15 @@ public class Jogador {
     }
     
     public void marcarSala(String codSala){
-        salasMarcadas.add(codSala);
+        mapa.marcar(codSala);
     }
     
     public void desmarcarSala(String codSala){
-        salasMarcadas.remove(codSala);
+        mapa.desmarcar(codSala);
     }
     
     public ArrayList<String> getMarcadas (){
-        return this.salasMarcadas;
+        return this.mapa.getMarcadas();
     }
 
     public boolean fugir() {
