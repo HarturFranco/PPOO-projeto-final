@@ -17,14 +17,16 @@ import java.util.ArrayList;
 
 public class Jogador {
 
+    private boolean vivo;
     private boolean chave;
     private boolean arma;
     private Sala salaAtual;    
     private ArrayList<String> salasMarcadas;
 
     public Jogador() {
-        this.chave = chave;
-        this.arma = arma;
+        this.chave = false;
+        this.arma = true;
+        this.vivo = true;
         //TODO - Receber salaAtual?
         this.salaAtual = null;
     }
@@ -46,17 +48,22 @@ public class Jogador {
     public boolean temArma() {
         return arma;
     }
+    
+    public boolean estaVivo(){
+        return vivo;
+    }
 
     public String atirar(String direcao){
         Sala alvo = salaAtual.getSaida( direcao);
         
-        if( !this.arma){
-            return "A sua arma não tem mais balas";
-        }
-        else if(alvo == null){
+        if(alvo == null){
             return "Você não tem acesso a essa sala.";
         }
+        else if( !arma){
+            return "A sua arma não tem mais balas";
+        }
         else{
+            arma = false;
             return alvo.atirarNaSala();
         }
     }
