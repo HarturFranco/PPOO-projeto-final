@@ -1,83 +1,109 @@
 26
-1
-2 5 6 
+id 1
+adjacentes 2 5 6
+tipo 
 
-2
-1 3
+id 2
+adjacentes 1 3
+tipo  
 
-3
-2 8 4
+id 3
+adjacentes 2 8 4
+tipo monstro
 
-4
-3 9 10 
-buraco
-5
-1 6 11
-armadilha
-6
-1 5 12
+id 4
+adjacentes 3 9 10
+tipo 
 
-7
+id 5
+adjacentes 1 6 11
+tipo 
 
+id 6
+adjacentes 1 5 12
+tipo buraco
 
-8
-3 14
+id 7
+adjacentes 
+tipo 
 
-9
-4 12 15
+id 8
+adjacentes 3 14
+tipo 
 
-10
-4 9 16
+id 9
+adjacentes 4 12 15
+tipo armadilha
 
-11
-5 12 17
+id 10
+adjacentes 4 9 16
+tipo 
 
-12
-6 11 13
+id 11
+adjacentes 5 12 17
+tipo inicio
 
-13
-12 14 19
+id 12
+adjacentes 6 11 13
+tipo 
 
-14
-8 13 20
+id 13
+adjacentes 12 14 19
+tipo armadilha
 
-15
-9 21 16
+id 14
+adjacentes 8 13 20
+tipo 
 
-16
-10 15 22 
-saida
-17
-11 18 23
+id 15
+adjacentes 9 21 16
+tipo buraco
 
-18
-17 19 23 
-armadilha
-19
-13 18 20
+id 16
+adjacentes 10 15 22
+tipo saida
 
-20
-14 19 25 
-buraco
-21
-15 22 26
+id 17
+adjacentes 11 18 23
+tipo 
 
-22
-16 21 26
+id 18
+adjacentes 17 19 23
+tipo armadilha
 
-23
-17 18 24
+id 19
+adjacentes 13 18 20
+tipo 
 
-24
-23 25
+id 20
+adjacentes 14 19 25
+tipo 
 
-25
-20 24 26 
-monstro
-26
-21 22 25
+id 21
+adjacentes 15 22 26
+tipo 
 
-"<html> <pre> 
+id 22
+adjacentes 16 21 26
+tipo 
+
+id 23
+adjacentes 17 18 24
+tipo 
+
+id 24
+adjacentes 23 25
+tipo 
+
+id 25
+adjacentes 20 23 26
+tipo buraco
+
+id 26
+adjacentes 21 22 25
+tipo 
+
+<html> <pre>
 ┌─────────────────────┬──────────┬──────────┬─────────────────────┐<br>
 │01                   │02        │03        │04                   │<br>
 ░                     ║          ║          ║                     │<br>
@@ -87,7 +113,7 @@ monstro
 │          ║          │          │          │          ║          │<br>
 │          │          │          │          │          │          │<br>
 ├────══────┼────══────┼──────────┼────══────┼────══────┼────══────┤<br>
-│11        │12        │13        │14        │15        │16        │<br>
+│11-INICIO │12        │13        │14        │15        │16-SAIDA  │<br>
 │          ║          ║          ║          │          ║          ▓<br>
 │          │          │          │          │          │          │<br>
 ├────══────┼──────────┼────══────┼────══────┼────══────┼────══────┤<br>
@@ -99,4 +125,4 @@ monstro
 │                     ║          ║          ║                     │<br>
 │                     │          │          │                     │<br>
 └─────────────────────┴──────────┴──────────┴─────────────────────┘
-</pre> </html>"
+</pre> </html>

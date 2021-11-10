@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -9,9 +10,9 @@ import java.util.HashMap;
  * Esta classe eh parte da aplicacao "Fuga da Masmorra". "Fuga da Masmorral" eh
  * um jogo de aventura muito simples, baseado em texto.
  *
- * A classe "Mapa" é a classe que define um dos ambientes de perigo em que o
- * jogador pode entrar. Nela há um monstro que emite uma respiração monstruosa
- * e, com o qual o jogador tem que lidar antes de entrar.
+ * A classe "Mapa" é a classe que define o mapa onde o jogador poderá se
+ * movimentar. Nela é definido a sala inicial, todas as salas e as salas
+ * marcadas a partir de uma aqruivo de texto.
  * 
  * @author Alexandre Rabello, Arthur Franco, Felipe Godoi e João Paulo Paiva.
  * @version 2021.11.06
@@ -19,79 +20,130 @@ import java.util.HashMap;
 
 public class Mapa {
   private String mapa;
+  private Sala salaInicio;
 
-  public Mapa() {
+  private HashMap<String, Sala> todasSalas;
+  private ArrayList<String> salasMarcadas;
+
+  public Mapa(String nomeMapa) {
     this.mapa = "";
+    this.todasSalas = new HashMap<>();
+
+    this.iniciarMapa(nomeMapa);
   }
 
-  public String getMapa() {
-    return mapa;
-  }
-
-  public HashMap<String, Sala> iniciarMapa(String nomeMapa) {
-    HashMap<String, Sala> todasSalas = new HashMap<>();
-
+  /**
+   * Cria todos as Salas e liga as saidas deles
+   */
+  private void iniciarMapa(String nomeMapa) {
+    todasSalas = new HashMap<>();
     try (BufferedReader arq = new BufferedReader(new FileReader(nomeMapa))) {
+
       String linha = arq.readLine();
       int numeroSalas = Integer.parseInt(linha);
+      arq.mark(numeroSalas * 100);
 
-      // Cria todas a salas
-      for (int i = 1; i <= numeroSalas; i++) {
-        Sala sala = new Sala(i + "");
-        todasSalas.put(i + "", sala);
-      }
-
-      // liga as salas com outras
+      // cria salas com seus tipos derivados
       for (int i = 1; i <= numeroSalas; i++) {
         linha = arq.readLine();
-        String numeroSala = linha;
+        String[] id = linha.split(" ");
+
+        linha = arq.readLine();
+        // String[] adjacentes = linha.split(" ");
+
+        linha = arq.readLine();
+        String[] tipo = linha.split(" ");
+
+        Sala sala;
+        String tipoTratado = tipo.length > 1 ? tipo[1] : "";
+
+        switch (tipoTratado) {
+        case "inicio":
+          sala = new Sala(id[1]);
+          salaInicio = sala;
+          break;
+        case "saida":
+          sala = new SalaSaida(id[1]);
+          break;
+        case "monstro":
+          sala = new SalaMonstro(id[1]);
+          break;
+        case "buraco":
+          sala = new SalaBuraco(id[1]);
+          break;
+        case "armadilha":
+          sala = new SalaArmadilha(id[1]);
+          break;
+        default:
+          sala = new Sala(id[1]);
+        }
+
+        todasSalas.put(id[1], sala);
+
+        linha = arq.readLine();
+      }
+
+      arq.reset();
+
+      for (int i = 1; i <= numeroSalas; i++) {
+        linha = arq.readLine();
+        String[] id = linha.split(" ");
 
         linha = arq.readLine();
         String[] adjacentes = linha.split(" ");
 
         linha = arq.readLine();
-        String tipo = linha;
 
         for (int j = 0; j < adjacentes.length; j++) {
-          todasSalas.get(numeroSala).adicionarSaida(adjacentes[j], todasSalas.get(j + ""));
+          if (i >= 1)
+            todasSalas.get(id[1]).adicionarSaida(adjacentes[j], todasSalas.get(adjacentes[j]));
+
         }
 
-        // casting de salas
-        Sala sala;
-        switch (tipo) {
-        case "saida":
-          sala = new SalaSaida("");
-          todasSalas.put(numeroSala, todasSalas.get(numeroSala).getClass().cast(sala));
-          break;
-        case "monstro":
-          sala = new SalaMonstro("");
-          todasSalas.put(numeroSala, todasSalas.get(numeroSala).getClass().cast(sala));
-          break;
-        case "armadilha":
-          sala = new SalaArmadilha("");
-          todasSalas.put(numeroSala, todasSalas.get(numeroSala).getClass().cast(sala));
-          break;
-        case "buraco":
-          sala = new SalaBuraco("");
-          todasSalas.put(numeroSala, todasSalas.get(numeroSala).getClass().cast(sala));
-          break;
-        }
+        linha = arq.readLine();
+      }
+
+      for (String key : todasSalas.keySet()) {
+        System.out.println(key + "-> " + todasSalas.get(key).getSaidaString());
       }
 
       linha = arq.readLine();
       while (linha != null) {
         mapa += linha;
+
         linha = arq.readLine();
       }
-
-      // System.out.println(mapa);
 
     } catch (IOException e) {
       System.out.println("Erro na leitura do mapa");
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
+  }
 
-    return todasSalas;
+  public String getMapa() {
+    return mapa;
+  }
+
+  public Sala getSalaInicio() {
+    return salaInicio;
+  }
+
+  public boolean existeSala(String direcao) {
+    if (todasSalas.get(direcao) != null)
+      return true;
+    return false;
+  }
+
+  public void marcar(String codSala) {
+    salasMarcadas.add(codSala);
+  }
+
+  public void desmarcar(String codSala) {
+    salasMarcadas.remove(codSala);
+  }
+
+  public ArrayList<String> getSalasMarcadas() {
+    return salasMarcadas;
   }
 }
