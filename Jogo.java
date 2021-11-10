@@ -21,14 +21,13 @@ import java.security.InvalidParameterException;
 public class Jogo {
     private Analisador analisador;
     private Jogador jogador;
-    private Mapa mapa;
     private InterfaceGrafica ig;
 
     /**
      * Cria o jogo e incializa seu mapa interno.
      */
     public Jogo(InterfaceGrafica ig) {
-        mapa = new Mapa("mapa.txt");
+        Mapa mapa = new Mapa("mapa.txt");
         jogador = new Jogador(mapa);
 
         analisador = new Analisador();
