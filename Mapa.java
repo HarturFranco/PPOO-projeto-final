@@ -113,7 +113,7 @@ public class Mapa {
 
         linha = arq.readLine();
       }
-
+      
     } catch (IOException e) {
       System.out.println("Erro na leitura do mapa");
     } catch (Exception e) {

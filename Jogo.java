@@ -35,6 +35,8 @@ public class Jogo {
 
         jogador.setSalaAtual((mapa.getSalaInicio()));
         this.ig = ig;
+        
+        this.ig.atualizarMapa(mapa.getMapa());
     }
 
     /**

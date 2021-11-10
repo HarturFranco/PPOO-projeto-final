@@ -35,9 +35,7 @@ public class InterfaceGrafica {
     private Analisador analisador;
 
     public InterfaceGrafica() {
-        jogo = new Jogo(this);
         analisador = new Analisador();
-
 
         this.fJanela = new JFrame("Fuga da Masmorra.");
         this.lTitulo = new JLabel("Fuga da Masmorra.");
@@ -66,30 +64,7 @@ public class InterfaceGrafica {
 
         // TODO - carregar do arquivo texto.
         // mapa
-        lMapa.setText(
-                "<html> <pre>" +
-                        "┌─────────────────────┬──────────┬──────────┬─────────────────────┐<br>" +
-                        "│01                   │02        │03        │04                   │<br>" +
-                        "│                     ║          ║          ║                     │<br>" +
-                        "│                     │          │          │                     │<br>" +
-                        "├────══────┬────══────┼──────────┼────┅┅────┼────══────┬────══────┤<br>" +
-                        "│05        │06        │07        │08        │09        │10        │<br>" +
-                        "│          ║          │          │          │          ║          │<br>" +
-                        "│          │          │          │          │          │          │<br>" +
-                        "├────══────┼────══────┼──────────┼────══────┼────══────┼────══────┤<br>" +
-                        "│11-INÍCIO │12        │13        │14        │15        │16-SAÍDA  │<br>" +
-                        "░          ║          ║          ║          │          ║          ▓<br>" +
-                        "│          │          │          │          │          │          │<br>" +
-                        "├────══────┼──────────┼────══────┼────══────┼────══────┼────══────┤<br>" +
-                        "│17        │18        │19        │20        │21        │22        │<br>" +
-                        "│          ║          ║          ║          │          ║          │<br>" +
-                        "│          │          │          │          │          │          │<br>" +
-                        "├────══────┴────══────┼──────────┼────══────┼────══────┴────══────┤<br>" +
-                        "│23                   │24        │25        │26                   │<br>" +
-                        "│                     ║          ║          ║                     │<br>" +
-                        "│                     │          │          │                     │<br>" +
-                        "└─────────────────────┴──────────┴──────────┴─────────────────────┘" +
-                        "</pre></html>");
+        
 
         lMapa.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 18));
         lMapa.setPreferredSize(new Dimension(735, 500));
@@ -159,6 +134,7 @@ public class InterfaceGrafica {
      */
     public void exibir() {
         fJanela.setVisible(true);
+        jogo = new Jogo(this);
     }
 
 
@@ -193,7 +169,7 @@ public class InterfaceGrafica {
     }
 
     public void atualizarMapa(String sMapa) {
-        lMapa.setText(sMapa);
+        this.lMapa.setText(sMapa);
     }
 
 
