@@ -40,20 +40,6 @@ public class Jogo {
      */
     public void jogar() {
         imprimirBoasVindas();
-
-        // Entra no loop de comando principal. Aqui nos repetidamente lemos
-        // comandos e os executamos ate o jogo terminar.
-
-        boolean terminado = false;
-        while (!terminado) {
-            try {
-                Comando comando = analisador.pegarComando();
-                terminado = processarComando(comando);
-            } catch (InvalidParameterException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-        System.out.println("Obrigado por jogar. Ate mais!");
     }
 
     /**
@@ -86,7 +72,7 @@ public class Jogo {
      * @param comando O Comando a ser processado.
      * @return true se o comando finaliza o jogo.
      */
-    private boolean processarComando(Comando comando) {
+    public boolean processarComando(Comando comando) {
         boolean querSair = false;
 
         PalavraComando palavraComando = comando.getPalavraDeComando();
