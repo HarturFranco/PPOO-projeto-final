@@ -128,13 +128,14 @@ public class Jogador {
      * executa acao de fulga.
      * @return boolean com valor true se o jogador tem chave e esta na sala da saida
      */
-    public boolean fugir() {
+    public String fugir() {
         // TODO - Usar Excecao?
         if (temChave()) {
             if (salaAtual instanceof SalaSaida) {
-                return true;
+                return "Você conseguiu Sair da Masmorra, parabéns!!!!";
             }
+            return "Você não está na sala de saida!";
         }
-        return false;
+        return "Você não possui a chave!";
     }
 }

@@ -22,17 +22,19 @@ public class Jogo {
     private Analisador analisador;
     private Jogador jogador;
     private Mapa mapa;
+    private InterfaceGrafica ig;
 
     /**
      * Cria o jogo e incializa seu mapa interno.
      */
-    public Jogo() {
+    public Jogo(InterfaceGrafica ig) {
         mapa = new Mapa("mapa.txt");
         jogador = new Jogador(mapa);
 
         analisador = new Analisador();
 
         jogador.setSalaAtual((mapa.getSalaInicio()));
+        this.ig = ig;
     }
 
     /**
@@ -46,23 +48,25 @@ public class Jogo {
      * Imprime informacoes sobre o ambiente atual.
      */
     private void imprimirInformacaoSobreAmbiente() {
-        System.out.println("Voce esta " + jogador.getSalaAtual().getDescricao());
-
-        System.out.print("Saidas: " + jogador.getSalaAtual().getSaidaString());
-
-        System.out.println();
+//        System.out.println("Voce esta " + jogador.getSalaAtual().getDescricao());
+//
+//        System.out.print("Saidas: " + jogador.getSalaAtual().getSaidaString());
+        String saidaTexto = "Voce esta " + jogador.getSalaAtual().getDescricao() + "<br>" + "Saidas: " + jogador.getSalaAtual().getSaidaString();
+        ig.atualizaSaidaTexto(saidaTexto);
+//        System.out.println();
     }
 
     /**
      * Imprime a mensagem de abertura para o jogador.
      */
     private void imprimirBoasVindas() {
-        System.out.println();
-        System.out.println("Bem-vindo ao World of Zuul!");
-        System.out.println("World of Zuul eh um novo jogo de aventura, incrivelmente chato.");
-        System.out.println("Digite 'ajuda' se voce precisar de ajuda.");
-        System.out.println();
-
+//        System.out.println();
+//        System.out.println("Bem-vindo ao World of Zuul!");
+//        System.out.println("World of Zuul eh um novo jogo de aventura, incrivelmente chato.");
+//        System.out.println("Digite 'ajuda' se voce precisar de ajuda.");
+//        System.out.println();
+        ig.atualizaSaidaTexto("Bem-Vindo ao Jogo Fuga da Masmorra, um jogo de aventura cujo seu objetivo é matar o monstro," +
+                " pegar sua chave da masmorra e fugir evitando os diversos perigos <br>");
         imprimirInformacaoSobreAmbiente();
     }
 
@@ -85,7 +89,8 @@ public class Jogo {
             atirar(comando);
             break;
         case DESCONHECIDO:
-            System.out.println("Eu nao entendi o que voce disse...");
+//            System.out.println("Eu nao entendi o que voce disse...");
+            ig.atualizaSaidaTexto("Eu nao entendi o que voce disse...");
             break;
         case DESMARCAR:
             desmarcarSala(comando);
@@ -105,7 +110,8 @@ public class Jogo {
         }
         if (!jogador.estaVivo()) {
             querSair = true;
-            System.out.println("GAME OVER!");
+//            System.out.println("GAME OVER!");
+            ig.atualizaSaidaTexto("GAME OVER!");
         }
         return querSair;
     }
@@ -122,8 +128,8 @@ public class Jogo {
         String segundaPalavra = comando.getSegundaPalavra();
 
         jogador.marcarSala(segundaPalavra);
-        System.out.println("Sala " + segundaPalavra + " marcada!");
-
+//        System.out.println("Sala " + segundaPalavra + " marcada!");
+        ig.atualizaSaidaTexto("Sala " + segundaPalavra + " marcada!");
         imprimirSalasMarcadas();
     }
 
@@ -139,8 +145,8 @@ public class Jogo {
         String segundaPalavra = comando.getSegundaPalavra();
 
         jogador.desmarcarSala(segundaPalavra);
-        System.out.println("Sala " + segundaPalavra + " desmarcada!");
-
+//        System.out.println("Sala " + segundaPalavra + " desmarcada!");
+        ig.atualizaSaidaTexto("Sala " + segundaPalavra + " desmarcada!");
         imprimirSalasMarcadas();
     }
 
@@ -155,10 +161,11 @@ public class Jogo {
         for (String marcada : marcadas) {
             salasMarcadas += marcada;
         }
-
+        // TODO - Enviar até vazia
         if (!salasMarcadas.equals("")) {
-            System.out.print("As Salas Marcadas: ");
-            System.out.println(salasMarcadas);
+//            System.out.print("As Salas Marcadas: ");
+//            System.out.println(salasMarcadas);
+            ig.atualizaSalasMarcadas(salasMarcadas);
         }
     }
 
@@ -167,11 +174,9 @@ public class Jogo {
      * executa a acao de fugir pelo jogador
      */
     private void fugir(Comando comando) {
-        if (jogador.fugir()) {
-            System.out.println("Você conseguiu Sair da Masmorra, parabéns!!!!");
-        } else {
-            System.out.println("Você nao pode fugir!");
-        }
+
+        ig.atualizaSaidaTexto(jogador.fugir());
+
     }
 
     // Implementacoes dos comandos do usuario
@@ -181,8 +186,10 @@ public class Jogo {
      * lista de palavras de comando
      */
     private void imprimirAjuda() {
-        System.out.println("Suas palavras de comando sao:");
-        System.out.println(analisador.getComandos());
+
+//        System.out.println("Suas palavras de comando sao:");
+//        System.out.println(analisador.getComandos());
+        ig.atualizaDicas("Suas Palavras de <br> comando são: <br>" + analisador.getComandos());
     }
 
     /**
@@ -195,7 +202,8 @@ public class Jogo {
             throw new InvalidParameterException("Ir pra onde?");
         }
         String direcao = comando.getSegundaPalavra();
-        System.out.println(jogador.entrar(direcao));
+//        System.out.println(jogador.entrar(direcao));
+        ig.atualizaSaidaTexto(jogador.entrar(direcao));
     }
 
     /**
@@ -208,7 +216,7 @@ public class Jogo {
             throw new InvalidParameterException("Artirar no quê?");
         }
         String direcao = comando.getSegundaPalavra();
-        jogador.atirar(direcao);
+        ig.atualizaSaidaTexto(jogador.atirar(direcao));
     }
 
     /**

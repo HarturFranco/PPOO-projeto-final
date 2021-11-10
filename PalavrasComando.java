@@ -68,7 +68,7 @@ public class PalavrasComando
         // ou retornar a string pra que a classe jogo chame a interface
         String listaComandos = "";
         for(String comando : comandosValidos.keySet()){
-            listaComandos += comando + " ";
+            listaComandos += "<li>" + comando + "</li><br>";
         }
         return listaComandos;
     }

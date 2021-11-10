@@ -35,7 +35,7 @@ public class InterfaceGrafica {
     private Analisador analisador;
 
     public InterfaceGrafica() {
-        jogo = new Jogo();
+        jogo = new Jogo(this);
         analisador = new Analisador();
 
 
@@ -43,13 +43,14 @@ public class InterfaceGrafica {
         this.lTitulo = new JLabel("Fuga da Masmorra.");
         this.lMapa = new JLabel();
         this.lMarcacoes = new JLabel("Marcações: ");
-        this.lDicas = new JLabel("<html></pre>Dicas:<br>Comandos</pre></html>", SwingConstants.LEFT);
-        this.lInformacoes = new JLabel("Você esta:");
+        this.lDicas = new JLabel("Dicas:");
+        this.lInformacoes = new JLabel("<html>Bem-Vindo ao Jogo Fuga da Masmorra, um jogo de aventura cujo seu objetivo é matar o monstro, <br>" +
+                "pegar sua chave e fugir da masmorra evitando seus diversos perigos; </html>");
         this.painelInferior = new JPanel();
         this.painelDicas = new JPanel();
         this.painelMarcacoes = new JPanel();
         this.painelTitulo = new JPanel();
-        this.tComando = new JTextField("> ");
+        this.tComando = new JTextField("");
         criaGUI();
     }
 
@@ -102,9 +103,8 @@ public class InterfaceGrafica {
 
         // Dicas
 
-        lDicas.setPreferredSize(new Dimension(200, 500));
+//        lDicas.setPreferredSize(new Dimension(200, 500));
         lDicas.setAlignmentX(SwingConstants.LEFT);
-        painelDicas.setLayout(new GridBagLayout());
         painelDicas.setPreferredSize(new Dimension(200, 500));
 //            GridBagConstraints gc = new GridBagConstraints();
 //            gc.gridx = 0;
@@ -164,14 +164,13 @@ public class InterfaceGrafica {
 
     private void despachaComando(String actionCommand) {
         // apaga comando do textArea
-        tComando.setText("> ");
+        tComando.setText("");
 
         Comando comando = analisador.pegarComando(actionCommand);
 
         try {
-            if (!jogo.processarComando(comando)) {
-                // TODO - Fechar janela?
-                lInformacoes.setText("ola");
+            if (jogo.processarComando(comando)) {
+                fJanela.dispose();
             }
         }catch (InvalidParameterException e){
             atualizaSaidaTexto(e.getMessage());
@@ -182,7 +181,7 @@ public class InterfaceGrafica {
     }
 
     public void atualizaDicas(String sDicas) {
-        lDicas.setText(sDicas);
+        lDicas.setText("<html>" + sDicas + "</html>");
     }
 
     public void atualizaSalasMarcadas(String sSalasMarcadas) {

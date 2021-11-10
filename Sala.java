@@ -3,7 +3,7 @@ import java.util.HashMap;
 /**
  * Classe Sala - uma sala em um jogo adventure.
  *
- * Esta classe eh parte da aplicacao "Fuga da Masmorra". "Fuga da Masmorral" eh
+ * Esta classe eh parte da aplicacao "Fuga da Masmorra". "Fuga da Masmorra" eh
  * um jogo de aventura muito simples, baseado em texto.
  *
  * A classe "Sala" é a classe que define os ambientes em que o jogador irá
