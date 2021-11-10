@@ -29,11 +29,10 @@ public class Jogador {
         this.arma = true;
         this.vivo = true;
         this.mapa = mapa;
-        // TODO - Receber salaAtual?
+        // TODO - Como definir isso aqui?
         this.salaAtual = null;
     }
 
-    // TODO - Mudar IrAmbiente para Classe Jogador?
     public void setSalaAtual(Sala salaAtual) {
         this.salaAtual = salaAtual;
     }
@@ -55,6 +54,13 @@ public class Jogador {
         return vivo;
     }
 
+
+    /**
+     * executa a acao de entrar em uma sala adjacente
+     * @param direcao eh a sala em que se deseja atirar
+     * @return narrativa ao atirar na sala
+     */
+    // TODO - passar "this" para atirar na sala. (nome do metodo de sala ta estranho tbm?)
     public String atirar(String direcao) {
         if (!mapa.existeSala(direcao)) {
             throw new InvalidParameterException("Essa sala não existe!");
@@ -72,6 +78,12 @@ public class Jogador {
         }
     }
 
+    /**
+     * executa a acao de entrar em uma sala adjacente
+     * @param direcao eh a sala em que se deseja entrar
+     * @return narrativa ao entrar na sala
+     */
+    // TODO - Mudar direcao para codSala?
     public String entrar(String direcao) {
         if (!mapa.existeSala(direcao)) {
             throw new InvalidParameterException("Essa sala não existe!");
@@ -87,18 +99,35 @@ public class Jogador {
         }
     }
 
+    /**
+     * marca a sala no mapa
+     * @param codSala codigo da sala a ser marcada
+     */
     public void marcarSala(String codSala) {
         mapa.marcar(codSala);
     }
 
+    /**
+     * desmarca a sala no mapa
+     * @param codSala codigo da sala a ser desmarcada
+     */
     public void desmarcarSala(String codSala) {
         mapa.desmarcar(codSala);
     }
 
+    /**
+     * metodo retorna as salas marcadas
+     * @return Salas do mapa marcadas pelo jogador
+     */
+    // TODO - seria legal retornar uma string?
     public ArrayList<String> getMarcadas() {
         return this.mapa.getSalasMarcadas();
     }
 
+    /**
+     * executa acao de fulga.
+     * @return boolean com valor true se o jogador tem chave e esta na sala da saida
+     */
     public boolean fugir() {
         // TODO - Usar Excecao?
         if (temChave()) {

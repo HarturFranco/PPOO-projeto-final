@@ -82,7 +82,6 @@ public class Jogo {
             imprimirAjuda();
             break;
         case ATIRAR:
-            // TODO - Implementar Atirar (sala)
             atirar(comando);
             break;
         case DESCONHECIDO:
@@ -92,15 +91,12 @@ public class Jogo {
             desmarcarSala(comando);
             break;
         case FUGIR:
-            // TODO - Usar Excecao aqui?
-            System.out.println("Fugir");
             fugir(comando);
             break;
         case IR:
             irParaAmbiente(comando);
             break;
         case MARCAR:
-            // TODO - Usar Excecao aqui?
             marcarSala(comando);
             break;
         case SAIR:
@@ -171,11 +167,8 @@ public class Jogo {
      * executa a acao de fugir pelo jogador
      */
     private void fugir(Comando comando) {
-        // TODO - Usar Excecao aqui?
-        // TODO - Mudar Texto.
         if (jogador.fugir()) {
             System.out.println("Você conseguiu Sair da Masmorra, parabéns!!!!");
-            // TODO - Finalizar programa.
         } else {
             System.out.println("Você nao pode fugir!");
         }
@@ -188,7 +181,6 @@ public class Jogo {
      * lista de palavras de comando
      */
     private void imprimirAjuda() {
-        // TODO - possivel mudança para gui, chamar gui.
         System.out.println("Suas palavras de comando sao:");
         System.out.println(analisador.getComandos());
     }
