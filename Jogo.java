@@ -151,7 +151,7 @@ public class Jogo {
         //System.out.println("Sala " + segundaPalavra + " desmarcada!");
         ig.atualizaSaidaTexto("Sala " + segundaPalavra + " desmarcada!");
         
-         ig.atualizarMapa(jogador.getMapa());
+        ig.atualizarMapa(jogador.getMapa());
         imprimirSalasMarcadas();
     }
 
@@ -207,8 +207,9 @@ public class Jogo {
             throw new InvalidParameterException("Ir pra onde?");
         }
         String direcao = comando.getSegundaPalavra();
-//        System.out.println(jogador.entrar(direcao));
+        //System.out.println(jogador.entrar(direcao));
         ig.atualizaSaidaTexto(jogador.entrar(direcao));
+        ig.atualizarMapa(jogador.getMapa());
     }
 
     /**

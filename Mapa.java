@@ -148,6 +148,10 @@ public class Mapa {
     }
   }
 
+    private void trocaUnic(char ant, char nov, int x, int y){
+        if(mapa[x][y] == ant)
+            mapa[x][y] = nov;
+    }
 
     private void trocaRecurs(char ant, char nov, int x, int y){
         if(mapa[x][y] == ant){
@@ -185,10 +189,10 @@ public class Mapa {
         
     int[] aux = cordenadas.get(codSala);
     
-    if(mapa[aux[0]][aux[1]] == '╱')
-        trocaRecurs('╱', '╳', aux[0], aux[1]);
+    if(mapa[aux[0]][aux[1]-1] == '╱')
+        trocaRecurs('╱', '╳', aux[0], aux[1]-1);
     else{
-        trocaRecurs(' ', '╱', aux[0], aux[1]);
+        trocaRecurs(' ', '╱', aux[0], aux[1]-1);
         salasMarcadas.add(codSala);
     }
   }
@@ -199,12 +203,22 @@ public class Mapa {
         
     int[] aux = cordenadas.get(codSala);
     
-    if(mapa[aux[0]][aux[1]] == '╳')
-        trocaRecurs('╳', ' ', aux[0], aux[1]);
+    if(mapa[aux[0]][aux[1]-1] == '╳')
+        trocaRecurs('╳', ' ', aux[0], aux[1]-1);
     else
-        trocaRecurs('╱', ' ', aux[0], aux[1]);
+        trocaRecurs('╱', ' ', aux[0], aux[1]-1);
     
     salasMarcadas.remove(codSala);
+  }
+
+  public void moveMarcador(String codSalaAnt , String codSalaNov){
+      int[] aux = cordenadas.get(codSalaAnt);
+      trocaUnic('☺', ' ', aux[0], aux[1]);
+      
+      aux = cordenadas.get(codSalaNov);
+      trocaUnic(' ', '☺', aux[0], aux[1]);
+      trocaUnic('╱', '☺', aux[0], aux[1]);
+      trocaUnic('╳', '☺', aux[0], aux[1]);
   }
 
   public ArrayList<String> getSalasMarcadas() {

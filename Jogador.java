@@ -96,6 +96,7 @@ public class Jogador {
         if (proximaSala == null) {
             return "Você não tem acesso a essa sala.";
         } else {
+            mapa.moveMarcador(salaAtual.getDescricao(), direcao);
             salaAtual = proximaSala;
             return salaAtual.entrarNaSala(this);
         }
