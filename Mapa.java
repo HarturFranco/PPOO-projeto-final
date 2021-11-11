@@ -177,8 +177,8 @@ public class Mapa {
         return salaInicio;
     }
 
-    public boolean existeSala(String direcao) {
-        if (todasSalas.get(direcao) != null)
+    public boolean existeSala(String codSala) {
+        if (todasSalas.get(codSala) != null)
             return true;
         return false;
     }

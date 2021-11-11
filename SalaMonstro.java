@@ -15,8 +15,8 @@
 public class SalaMonstro extends Sala {
     private boolean monstro;
 
-    public SalaMonstro(String descricao) {
-        super(descricao);
+    public SalaMonstro(String codigo) {
+        super(codigo);
         this.monstro = true;
     }
 

@@ -14,8 +14,8 @@
  
 public class SalaBuraco extends Sala
 {    
-    public SalaBuraco(String descricao){
-        super(descricao);
+    public SalaBuraco(String codigo){
+        super(codigo);
     }
 
     /**

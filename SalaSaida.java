@@ -13,8 +13,8 @@
  */
 
 public class SalaSaida extends Sala {
-    public SalaSaida(String descricao) {
-        super(descricao);
+    public SalaSaida(String codigo) {
+        super(codigo);
     }
 
     /**
