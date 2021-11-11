@@ -16,16 +16,17 @@ import java.util.HashMap;
  * @version 2021.11.06
  */
 public class Sala {
-    private String descricao;
+    private String codigo;
     HashMap<String, Sala> saidas;
 
     /**
-     * Cria uma sala com a "descricao" passada. Inicialmente, ela nao tem saidas.
-     * "descricao" eh algo como "Sala 01" ou "Sala 02"
+     * Cria uma sala com a "codigo" passada. Inicialmente, ela nao tem saidas.
+     * "codigo" eh algo como "Sala 01" ou "Sala 02"
+     *
      * @param codSala código da sala inciada.
      */
-    public Sala(String descricao) {
-        this.descricao = descricao;
+    public Sala(String codSala) {
+        this.codigo = codSala;
         saidas = new HashMap<>();
     }
 
@@ -35,15 +36,15 @@ public class Sala {
      * @param codSala código da saida.
      * @param adjacente objeto da sala adicionada como saída
      */
-    public void adicionarSaida(String cordenada, Sala adjacente) {
-        saidas.put(cordenada, adjacente);
+    public void adicionarSaida(String codSala, Sala adjacente) {
+        saidas.put(codSala, adjacente);
     }
 
     /**
      * @return O código da sala.
      */
     public String getDescricao() {
-        return descricao;
+        return codigo;
     }
 
     /**
@@ -53,27 +54,29 @@ public class Sala {
      * @param codSala código da sala que o jogador quer entrar.
      * @return A sala para qual o jogador irá.
      */
-    public Sala getSaida(String cordenada) {
-        return saidas.get(cordenada);
+    public Sala getSaida(String codSala) {
+        return saidas.get(codSala);
     }
 
     /**
      * string com todas as salas vizinhas dessa
-     * 
+     *
      * @return Os códigos das salas adjacentes. por exemplo 'adjacentes: sala01,
      *         sala02, sala03'".
      */
+
     public String getSaidaString() {
         String strSaidas = "";
         for (String s : saidas.keySet()) {
             strSaidas += s + " ";
         }
+
         return strSaidas;
     }
 
     /**
      * Os sons ouvidos emitidos por essa sala
-     * 
+     *
      * @return String com o sons ou brisas que essa sala leva às suas salas vizinhas
      *         por exemplo "uma brisa fria" nesse caso, a sala não produz nada de
      *         anormal, então retorna uma string vazia.
@@ -85,7 +88,7 @@ public class Sala {
     /**
      * Dá uma descrição e faz alterações que acontecem quando o jogador entra
      * nessa sala.
-     * 
+     *
      * @param jogador objeto do jogador que entrará na sala
      * @return String mostrando o que o jogador vê, ouve e sente ao entrar nessa
      *         sala. nesse caso, sendo uma sala segura ele vê as outras salas e ouve
@@ -108,7 +111,7 @@ public class Sala {
     /**
      * Dá uma descrição e faz alterações que acontecem quando o jogador atira
      * em direção a essa sala.
-     * 
+     *
      * @param jogador objeto do jogador que entrará na sala
      * @return String com o que acontece ao atirar em direção à sala. nesse caso, a
      *         sala não contem o monstro vivo e, ao atirar nela, o jogador gasta sua

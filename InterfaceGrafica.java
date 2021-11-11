@@ -35,9 +35,9 @@ public class InterfaceGrafica {
     private Analisador analisador;
 
 
-    public InterfaceGrafica() {
+    public InterfaceGrafica(Jogo jogo) {
         analisador = new Analisador();
-
+        this.jogo = jogo;
         this.fJanela = new JFrame("Fuga da Masmorra.");
         this.lTitulo = new JLabel("Fuga da Masmorra.");
         this.lMapa = new JLabel();
@@ -150,7 +150,6 @@ public class InterfaceGrafica {
      */
     public void exibir() {
         fJanela.setVisible(true);
-        this.jogo = new Jogo(this);
     }
 
 
