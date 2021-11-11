@@ -162,7 +162,7 @@ public class InterfaceGrafica {
 
         try {
             if (jogo.processarComando(comando)) {
-                sair();
+                sair("Fim de Jogo", "Ao clicar em \"OK!\" o jogo será finalizado.");
             }
         }catch (InvalidParameterException e){
             atualizaDicas(e.getMessage());
@@ -172,9 +172,9 @@ public class InterfaceGrafica {
 
     }
 
-    private void sair() {
+    public void sair(String t, String m) {
         int ok = JOptionPane.showOptionDialog(fJanela,
-                "Ao clicar em \"OK!\" o jogo será finalizado.","Fim de Jogo",
+                m,t,
                 JOptionPane.DEFAULT_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
                 null,

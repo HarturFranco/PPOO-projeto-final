@@ -28,7 +28,7 @@ public class Mapa {
     private ArrayList<String> salasMarcadas;
     private HashMap<String, int[]> cordenadas;
 
-    public Mapa(String nomeMapa) {
+    public Mapa(String nomeMapa) throws Exception {
         this.todasSalas = new HashMap<>();
         this.salasMarcadas = new ArrayList<>();
         this.cordenadas = new HashMap<>();
@@ -40,7 +40,7 @@ public class Mapa {
      * @param nomeMapa nome do arquivo de texto a ser lido
      * Lê e define o mapa de um arquivo txt 
      */
-    private void iniciarMapa(String nomeMapa) {
+    private void iniciarMapa(String nomeMapa) throws Exception {
         try (BufferedReader arq = new BufferedReader(new FileReader(nomeMapa))) {
             
             //lê a quantidade de salas desse mapa
@@ -54,7 +54,7 @@ public class Mapa {
                 linha = arq.readLine();
                 String[] id = linha.split(" ");
 
-                linha = arq.readLine();
+                arq.readLine();
 
                 linha = arq.readLine();
                 String[] tipo = linha.split(" ");
@@ -85,7 +85,7 @@ public class Mapa {
 
                 todasSalas.put(id[1], sala);
 
-                linha = arq.readLine();
+                arq.readLine();
             }
             
             //volta o ponteiro de leitura para a linha marcada
@@ -99,20 +99,19 @@ public class Mapa {
                 linha = arq.readLine();
                 String[] adjacentes = linha.split(" ");
 
-                linha = arq.readLine();
+                arq.readLine();
 
                 for (int j = 1; j < adjacentes.length; j++) {
                     if (i >= 1)
                         todasSalas.get(id[1]).adicionarSaida(adjacentes[j], todasSalas.get(adjacentes[j]));
                 }
-                linha = arq.readLine();
+                arq.readLine();
             }
             linha = arq.readLine();
 
             //procura pelo indicador de mapa visual
             while (!linha.equals("-mapa-") || linha != null) {
                 linha = arq.readLine();
-                System.out.println(linha);
             }
             
             //Lê mapa visual, caso exista
@@ -123,7 +122,7 @@ public class Mapa {
                 int n0 = Integer.parseInt(linhas[0]);
 
                 mapa = new char[n0][];
-                linha = arq.readLine();
+                arq.readLine();
                 linha = arq.readLine();
 
                 //lê o mapa visual
@@ -141,15 +140,14 @@ public class Mapa {
                     linhas = linha.split(" ");
                     aux[0] = Integer.parseInt(linhas[2]);
                     aux[1] = Integer.parseInt(linhas[3]);
-                    System.out.println("SALA: " + linhas[1] + "->" + linhas[2] + "," + linhas[3]);
                     cordenadas.put(linhas[1], aux);
                 }
             }
 
         } catch (IOException e) {
-            System.out.println("Erro na leitura do mapa");
+            throw new IOException("Erro na leitura do mapa.");
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            throw new Exception(e.getMessage());
         }
     }
 
