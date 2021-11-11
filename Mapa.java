@@ -105,8 +105,16 @@ public class Mapa {
         linha = arq.readLine();
       }
 
+<<<<<<< HEAD
       for (String key : todasSalas.keySet()) {
         System.out.println(key + "-> " + todasSalas.get(key).getSaidaString());
+=======
+      linha = arq.readLine();
+      while (linha != null) {
+        mapa += linha;
+
+        linha = arq.readLine();
+>>>>>>> 902944c97f0be2c443d660a1e9443d932a5bbed0
       }
       
         while(!linha.equals("-mapa-")){
