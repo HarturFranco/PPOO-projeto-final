@@ -37,22 +37,24 @@ public class Mapa {
     }
 
     /**
-     * Cria todos as Salas e liga as saidas deles
+     * @param nomeMapa nome do arquivo de texto a ser lido
+     * Lê e define o mapa de um arquivo txt 
      */
     private void iniciarMapa(String nomeMapa) {
         try (BufferedReader arq = new BufferedReader(new FileReader(nomeMapa))) {
-
+            
+            //lê a quantidade de salas desse mapa
             String linha = arq.readLine();
             int numeroSalas = Integer.parseInt(linha);
             arq.mark(numeroSalas * 100);
 
-            // cria salas com seus tipos derivados
+
+            //lê e cria salas com seus tipos derivados
             for (int i = 1; i <= numeroSalas; i++) {
                 linha = arq.readLine();
                 String[] id = linha.split(" ");
 
                 linha = arq.readLine();
-                // String[] adjacentes = linha.split(" ");
 
                 linha = arq.readLine();
                 String[] tipo = linha.split(" ");
@@ -85,9 +87,11 @@ public class Mapa {
 
                 linha = arq.readLine();
             }
-
+            
+            //volta o ponteiro de leitura para a linha marcada
             arq.reset();
 
+            //liga as salas a suas adjacentes
             for (int i = 1; i <= numeroSalas; i++) {
                 linha = arq.readLine();
                 String[] id = linha.split(" ");
@@ -100,46 +104,46 @@ public class Mapa {
                 for (int j = 1; j < adjacentes.length; j++) {
                     if (i >= 1)
                         todasSalas.get(id[1]).adicionarSaida(adjacentes[j], todasSalas.get(adjacentes[j]));
-
                 }
-
                 linha = arq.readLine();
             }
-
-            for (String key : todasSalas.keySet())
-                System.out.println(key + "-> " + todasSalas.get(key).getSaidaString());
             linha = arq.readLine();
 
-
-            while (!linha.equals("-mapa-")) {
+            //procura pelo indicador de mapa visual
+            while (!linha.equals("-mapa-") || linha != null) {
                 linha = arq.readLine();
                 System.out.println(linha);
             }
-
-            linha = arq.readLine();
-            String[] linhas = linha.split(" ");
-            int n0 = Integer.parseInt(linhas[0]);
-
-            mapa = new char[n0][];
-            linha = arq.readLine();
-            linha = arq.readLine();
-
-
-            for (int i = 0; i < n0; i++) {
-                mapa[i] = linha.toCharArray();
+            
+            //Lê mapa visual, caso exista
+            if(linha != null){
+                //lê número de linhas do mapa
                 linha = arq.readLine();
-            }
+                String[] linhas = linha.split(" ");
+                int n0 = Integer.parseInt(linhas[0]);
 
-            int[] aux;
-            for (int i = 0; i < numeroSalas; i++) {
+                mapa = new char[n0][];
+                linha = arq.readLine();
                 linha = arq.readLine();
 
-                aux = new int[2];
-                linhas = linha.split(" ");
-                aux[0] = Integer.parseInt(linhas[2]);
-                aux[1] = Integer.parseInt(linhas[3]);
-                System.out.println("SALA: " + linhas[1] + "->" + linhas[2] + "," + linhas[3]);
-                cordenadas.put(linhas[1], aux);
+                //lê o mapa visual
+                for (int i = 0; i < n0; i++) {
+                    mapa[i] = linha.toCharArray();
+                    linha = arq.readLine();
+                }
+
+                //lê as cordenadas das salas para alteração
+                int[] aux;
+                for (int i = 0; i < numeroSalas; i++) {
+                    linha = arq.readLine();
+
+                    aux = new int[2];
+                    linhas = linha.split(" ");
+                    aux[0] = Integer.parseInt(linhas[2]);
+                    aux[1] = Integer.parseInt(linhas[3]);
+                    System.out.println("SALA: " + linhas[1] + "->" + linhas[2] + "," + linhas[3]);
+                    cordenadas.put(linhas[1], aux);
+                }
             }
 
         } catch (IOException e) {
@@ -149,11 +153,35 @@ public class Mapa {
         }
     }
 
+
+    /**
+     * Troca um caracter por outro do mapa visual
+     *
+     * @param ant caracter a ser trocado
+     * @param nov caracter que substituirá
+     * @param x valor da cordenada x do mapa
+     * @param y valor da cordenada y do mapa
+     * @return String mostrando o que o jogador vê, ouve e sente ao entrar nessa
+     *         sala. nesse caso, sendo uma sala segura ele vê as outras salas e ouve
+     *         possíveis sons/ brisas vindos das salas vizinhas.
+     */
     private void trocaUnic(char ant, char nov, int x, int y) {
         if (mapa[x][y] == ant)
             mapa[x][y] = nov;
     }
 
+    /**
+     * Troca todos caracteres iguais adjacentes
+     *  por outro do mapa visual
+     *
+     * @param ant caracter a ser trocado
+     * @param nov caracter que substituirá
+     * @param x valor da cordenada x do mapa
+     * @param y valor da cordenada y do mapa
+     * @return String mostrando o que o jogador vê, ouve e sente ao entrar nessa
+     *         sala. nesse caso, sendo uma sala segura ele vê as outras salas e ouve
+     *         possíveis sons/ brisas vindos das salas vizinhas.
+     */
     private void trocaRecurs(char ant, char nov, int x, int y) {
         if (mapa[x][y] == ant) {
             mapa[x][y] = nov;
