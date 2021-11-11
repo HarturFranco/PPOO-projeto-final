@@ -1,9 +1,9 @@
 /**
  * Classe SalaArmadilha - uma sala perigosa em um jogo adventure.
- * <p>
+ *
  * Esta classe eh parte da aplicacao "Fuga da Masmorra".
  * "Fuga da Masmorral" eh um jogo de aventura muito simples, baseado em texto.
- * <p>
+ *
  * A classe "SalaArmadilha" é a classe que define um dos ambientes de perigo
  * em que o jogador pode entrar. Nela há uma armadilha que emite sons de
  * maquinário e irá terminar o jogo caso o jogador tente acessá-la.
@@ -13,8 +13,8 @@
  */
 
 public class SalaArmadilha extends Sala {
-    public SalaArmadilha(String descricao) {
-        super(descricao);
+    public SalaArmadilha(String codigo) {
+        super(codigo);
     }
 
     /**
@@ -36,7 +36,7 @@ public class SalaArmadilha extends Sala {
     @Override
     public String entrarNaSala(Jogador jogador) {
         jogador.setMorto();
-        return "-Você dá passos firmes em direção à sala " + this.getDescricao() + ". \nPassando por um corredor escuro, você pisa em falso e sente algo se mover embaixo de seus pés.\n" +
+        return "-Você dá passos firmes em direção à sala " + this.getCodigo() + ". \nPassando por um corredor escuro, você pisa em falso e sente algo se mover embaixo de seus pés.\n" +
                 "Sem tempo de reagir, você é atingido em seu peito por uma longa estaca de madeira," +
                 "\nvai ao chão e dá os ultimos suspiros sob som das engrenagens da armadilha se movimentando.\n";
     }

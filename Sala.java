@@ -43,7 +43,7 @@ public class Sala {
     /**
      * @return O código da sala.
      */
-    public String getDescricao() {
+    public String getCodigo() {
         return codigo;
     }
 
@@ -95,7 +95,7 @@ public class Sala {
      *         possíveis sons/ brisas vindos das salas vizinhas.
      */
     public String entrarNaSala(Jogador jogador) {
-        String s = "-Você dá passos firmes em direção à sala " + this.getDescricao()
+        String s = "-Você dá passos firmes em direção à sala " + this.getCodigo()
                 + ". \nPassando por um corredor escuro, consegue chegar ao outro lado.\n";
         s = s + "-Ao chegar, você percebe que tochas iluminam as portas das salas " + this.getSaidaString() + "\n";
 
@@ -120,7 +120,7 @@ public class Sala {
      */
     public String atirarNaSala(Jogador jogador) {
         jogador.setMorto();
-        return "-Você atira às cegas em direção a porta da sala " + this.getDescricao()
+        return "-Você atira às cegas em direção a porta da sala " + this.getCodigo()
                 + ".\nApós o estouro da arma, seus ovidos zunem por um breve momento.\n "
                 + "Sua audição volta logo a tempo de ouvir o os de cascos pesados rapidamente se aproximando de você.\n"
                 + "Mal tendo tempo de localizar de qual porta vem o som, você é atingido pelas costas por uma terrível besta e perde imediatamente a consiência.";

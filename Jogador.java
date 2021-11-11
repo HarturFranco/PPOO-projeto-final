@@ -70,15 +70,15 @@ public class Jogador {
     /**
      * executa a acao de entrar em uma sala adjacente
      *
-     * @param direcao eh a sala em que se deseja atirar
+     * @param codSala eh a sala em que se deseja atirar
      * @return narrativa ao atirar na sala
      */
-    public String atirar(String direcao) {
-        if (!mapa.existeSala(direcao)) {
+    public String atirar(String codSala) {
+        if (!mapa.existeSala(codSala)) {
             throw new InvalidParameterException("Essa sala não existe!");
         }
 
-        Sala alvo = salaAtual.getSaida(direcao);
+        Sala alvo = salaAtual.getSaida(codSala);
 
         if (alvo == null) {
             return "Você não tem acesso a essa sala.";
@@ -93,22 +93,21 @@ public class Jogador {
     /**
      * executa a acao de entrar em uma sala adjacente
      *
-     * @param direcao eh a sala em que se deseja entrar
+     * @param codSala eh a sala em que se deseja entrar
      * @return narrativa ao entrar na sala
      */
-    // TODO - Mudar direcao para codSala?
-    public String entrar(String direcao) {
-        if (!mapa.existeSala(direcao)) {
+    public String entrar(String codSala) {
+        if (!mapa.existeSala(codSala)) {
             throw new InvalidParameterException("Essa sala não existe!");
         }
 
-        Sala proximaSala = salaAtual.getSaida(direcao);
+        Sala proximaSala = salaAtual.getSaida(codSala);
 
         if (proximaSala == null) {
             throw new InvalidParameterException("Você não tem acesso a essa sala!");
         }
 
-        mapa.moveMarcador(salaAtual.getDescricao(), direcao);
+        mapa.moveMarcador(salaAtual.getCodigo(), codSala);
         salaAtual = proximaSala;
         return salaAtual.entrarNaSala(this);
     }

@@ -5,7 +5,7 @@ public class Programa {
 		Jogo jogo = new Jogo();
 //        InterfaceGrafica ig = new InterfaceGrafica();
 //        ig.exibir();
-		jogo.jogar();
+//		jogo.jogar();
     }
 
 }

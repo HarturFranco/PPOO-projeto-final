@@ -178,7 +178,7 @@ public class Jogo {
     }
 
     /**
-     * Tenta ir em uma direcao. Se existe uma saida entra no novo ambiente, caso
+     * Tenta ir em uma codSala. Se existe uma saida entra no novo ambiente, caso
      * contrario imprime mensagem de erro.
      */
     private void irParaAmbiente(Comando comando) {
@@ -186,9 +186,9 @@ public class Jogo {
             // se nao ha segunda palavra, nao sabemos pra onde ir...
             throw new InvalidParameterException("Ir pra onde?");
         }
-        String direcao = comando.getSegundaPalavra();
-        //System.out.println(jogador.entrar(direcao));
-        ig.atualizaSaidaTexto(jogador.entrar(direcao));
+        String codSala = comando.getSegundaPalavra();
+        //System.out.println(jogador.entrar(codSala));
+        ig.atualizaSaidaTexto(jogador.entrar(codSala));
         ig.atualizarMapa(jogador.getMapa());
     }
 
@@ -201,12 +201,12 @@ public class Jogo {
             // se nao ha segunda palavra, nao sabemos pra onde atirar..
             throw new InvalidParameterException("Artirar no quê?");
         }
-        String direcao = comando.getSegundaPalavra();
+        String codSala = comando.getSegundaPalavra();
 
         if (jogador.temArma()){
-            ig.atualizaSaidaTexto(jogador.atirar(direcao));
+            ig.atualizaSaidaTexto(jogador.atirar(codSala));
         } else {
-            ig.atualizaDicas(jogador.atirar(direcao));
+            ig.atualizaDicas(jogador.atirar(codSala));
         }
 
     }
