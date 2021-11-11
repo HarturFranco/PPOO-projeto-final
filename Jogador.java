@@ -3,10 +3,10 @@ import java.security.InvalidParameterException;
 
 /**
  * Classe Jogador - um Jogador em um jogo adventure.
- *
+ * <p>
  * Esta classe eh parte da aplicacao "Fuga da Masmorra". "Fuga da Masmorral" eh
  * um jogo de aventura muito simples, baseado em texto.
- *
+ * <p>
  * A classe "Jogador" é a classe que define o jogador, eh nela que fica os dados
  * da sala atual, dois atributos do tipo booleano arma indica se o jogador tem a
  * arma usada para matar o monstro e chave indica se o jogador possui a chave
@@ -26,7 +26,6 @@ public class Jogador {
     private Mapa mapa;
 
     /**
-     *
      * @param mapa
      * @param salaInicio
      */
@@ -48,7 +47,7 @@ public class Jogador {
         return chave;
     }
 
-    public void pegaChave(){
+    public void pegaChave() {
         chave = true;
     }
 
@@ -64,12 +63,13 @@ public class Jogador {
         return this.livre;
     }
 
-    public void setMorto(){
+    public void setMorto() {
         vivo = false;
     }
 
     /**
      * executa a acao de entrar em uma sala adjacente
+     *
      * @param direcao eh a sala em que se deseja atirar
      * @return narrativa ao atirar na sala
      */
@@ -92,6 +92,7 @@ public class Jogador {
 
     /**
      * executa a acao de entrar em uma sala adjacente
+     *
      * @param direcao eh a sala em que se deseja entrar
      * @return narrativa ao entrar na sala
      */
@@ -114,6 +115,7 @@ public class Jogador {
 
     /**
      * marca a sala no mapa
+     *
      * @param codSala codigo da sala a ser marcada
      */
     public void marcarSala(String codSala) {
@@ -122,6 +124,7 @@ public class Jogador {
 
     /**
      * desmarca a sala no mapa
+     *
      * @param codSala codigo da sala a ser desmarcada
      */
     public void desmarcarSala(String codSala) {
@@ -130,15 +133,17 @@ public class Jogador {
 
     /**
      * metodo retorna as salas marcadas
+     *
      * @return Salas do mapa marcadas pelo jogador
      */
     // TODO - seria legal retornar uma string?
     public ArrayList<String> getMarcadas() {
         return this.mapa.getSalasMarcadas();
     }
-    
-       /**
+
+    /**
      * metodo retorna a arte deo mapa do jogador
+     *
      * @return a arte do mapa
      */
     // TODO - seria legal retornar uma string?
@@ -148,6 +153,7 @@ public class Jogador {
 
     /**
      * executa acao de fulga.
+     *
      * @return boolean com valor true se o jogador tem chave e esta na sala da saida
      */
     public String fugir() {

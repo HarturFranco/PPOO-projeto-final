@@ -26,15 +26,10 @@ public class Jogo {
     /**
      * Cria o jogo e incializa seu mapa interno.
      */
-    public Jogo(InterfaceGrafica ig) {
+    public Jogo() {
         Mapa mapa = new Mapa("mapa.txt");
         jogador = new Jogador(mapa, mapa.getSalaInicio());
-
         analisador = new Analisador();
-
-        this.ig = ig;
-        
-        this.ig.atualizarMapa(mapa.getMapa());
         jogar();
     }
 
@@ -42,6 +37,8 @@ public class Jogo {
      * Rotina principal do jogo. Fica em loop ate terminar o jogo.
      */
     public void jogar() {
+        this.ig = new InterfaceGrafica(this);
+        ig.exibir();
         imprimirBoasVindas();
     }
 
@@ -51,6 +48,7 @@ public class Jogo {
     private void imprimirBoasVindas() {
         ig.atualizaSaidaTexto("Bem-Vindo ao Jogo Fuga da Masmorra, um jogo de aventura cujo seu objetivo é matar o monstro," +
                 " pegar sua chave da masmorra e fugir evitando os diversos perigos <br>");
+        this.ig.atualizarMapa(jogador.getMapa());
     }
 
     /**
