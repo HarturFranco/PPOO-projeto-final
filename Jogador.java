@@ -94,12 +94,12 @@ public class Jogador {
         Sala proximaSala = salaAtual.getSaida(direcao);
 
         if (proximaSala == null) {
-            return "Você não tem acesso a essa sala.";
-        } else {
-            mapa.moveMarcador(salaAtual.getDescricao(), direcao);
-            salaAtual = proximaSala;
-            return salaAtual.entrarNaSala(this);
+            throw new InvalidParameterException("Você não tem acesso a essa sala!");
         }
+
+        mapa.moveMarcador(salaAtual.getDescricao(), direcao);
+        salaAtual = proximaSala;
+        return salaAtual.entrarNaSala(this);
     }
 
     /**

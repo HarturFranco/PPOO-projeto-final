@@ -42,7 +42,7 @@ public class InterfaceGrafica {
         this.lMapa = new JLabel();
         this.lMarcacoes = new JLabel("Marcações: ");
         this.lDicas = new JLabel("Dicas:");
-        this.lInformacoes = new JLabel("<html>Bem-Vindo ao Jogo Fuga da Masmorra, um jogo de aventura cujo seu objetivo é matar o monstro, <br>" +
+        this.lInformacoes = new JLabel("<html>Bem-Vindo ao Jogo Fuga da Masmorra, um jogo de aventura cujo seu objetivo é matar o monstro," +
                 "pegar sua chave e fugir da masmorra evitando seus diversos perigos; </html>");
         this.painelInferior = new JPanel();
         this.painelDicas = new JPanel();
@@ -78,15 +78,17 @@ public class InterfaceGrafica {
 
         // Dicas
 
-
+        painelDicas.setLayout(new BoxLayout(painelDicas, BoxLayout.Y_AXIS));
         painelDicas.setPreferredSize(new Dimension(200, 500));
+        lDicas.setMaximumSize(new Dimension(200, 500));
         painelDicas.add(lDicas);
         painelDicas.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         pane.add(painelDicas, BorderLayout.WEST);
 
 
         // Painel Inferior com informacoes do jogo + input de comandos
-        painelInferior.setLayout(new GridLayout(0, 1));
+//        painelInferior.setLayout(new GridLayout(0, 1));
+        painelInferior.setLayout(new BoxLayout(painelInferior, BoxLayout.Y_AXIS));
         painelInferior.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         tComando.addActionListener(new ActionListener() {
             @Override
@@ -126,7 +128,7 @@ public class InterfaceGrafica {
      */
     public void exibir() {
         fJanela.setVisible(true);
-        jogo = new Jogo(this);
+        this.jogo = new Jogo(this);
     }
 
 
@@ -138,7 +140,17 @@ public class InterfaceGrafica {
 
         try {
             if (jogo.processarComando(comando)) {
-                fJanela.dispose();
+                int n = JOptionPane.showOptionDialog(fJanela,
+                        "Ao clicar em \"OK!\" o jogo será finalizado.","Fim de Jogo",
+                        JOptionPane.PLAIN_MESSAGE,
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        null,
+                        "Ok!");
+                System.out.println(n);
+                if (n == 0){
+                    fJanela.dispose();
+                }
             }
         }catch (InvalidParameterException e){
             atualizaSaidaTexto(e.getMessage());
@@ -149,15 +161,15 @@ public class InterfaceGrafica {
     }
 
     public void atualizaDicas(String sDicas) {
-        lDicas.setText(String.format("<html><div style=\"width:%dpx;\">%s</div></html>", painelDicas.getWidth() , sDicas));
+        lDicas.setText(String.format("<html><div style=\"width:%dpx;\"><pre>%s</pre></div></html>", painelDicas.getWidth() , sDicas));
     }
 
     public void atualizaSalasMarcadas(String sSalasMarcadas) {
-        lMarcacoes.setText(String.format("<html><div style=\"width:%dpx;\">%s</div></html>", painelMarcacoes.getWidth() , sSalasMarcadas));
+        lMarcacoes.setText(String.format("<html><div style=\"width:%dpx;\"><pre>%s</pre></div></html>", painelMarcacoes.getWidth() , sSalasMarcadas));
     }
 
     public void atualizaSaidaTexto(String sInformacao) {
-        lInformacoes.setText(String.format("<html><div style=\"width:%dpx;\">%s</div></html>", painelInferior.getWidth() , sInformacao));
+        lInformacoes.setText(String.format("<html><div style=\"width:%dpx;\"><pre>%s</pre></div></html>", painelInferior.getWidth() , sInformacao));
     }
 
     public void atualizarMapa(String sMapa) {
