@@ -24,7 +24,7 @@ public class SalaArmadilha extends Sala
      *  sons de engrenagens para as salas vizinhas.
      */
     public String getSom(){
-        return "Você consegue ouvir sons de algum tipo de maquinário vindo de alguma das salas vizinhas, mas você não sabe ao certo de qual.\n";
+        return "-Você consegue ouvir sons de algum tipo de maquinário vindo de alguma das salas vizinhas, mas você não sabe ao certo de qual.\n";
     }
     
     /**
@@ -36,8 +36,9 @@ public class SalaArmadilha extends Sala
     @Override
     public String entrarNaSala(Jogador jogador) {
         jogador.setMorto();
-        return "Você dá passos firmes em direção à "+this.getDescricao()+". \n Passando por um corredor escuro, você pisa em falso e sente algo se mover embaixo de seus pés.\n"+
-            "Sem tempo de reagir, você é atingido em seu peito por uma longa estaca de madeira, vai ao chão e dá os ultimos suspiros sob som das engrenagens da armadilha se movimentando.\n";
+        return "-Você dá passos firmes em direção à sala "+this.getDescricao()+". \nPassando por um corredor escuro, você pisa em falso e sente algo se mover embaixo de seus pés.\n"+
+            "Sem tempo de reagir, você é atingido em seu peito por uma longa estaca de madeira,"+
+            "\nvai ao chão e dá os ultimos suspiros sob som das engrenagens da armadilha se movimentando.\n";
     }
     
 }

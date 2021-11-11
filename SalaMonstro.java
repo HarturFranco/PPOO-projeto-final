@@ -44,12 +44,12 @@ public class SalaMonstro extends Sala
     public String entrarNaSala(Jogador jogador) {
         if( this.monstro){
             jogador.setMorto();
-            return "Você dá passos firmes em direção à "+this.getDescricao()+". \n Passando por um corredor escuro, você encontra a próxima sala, mas quando nela chega já é tarde demais.\n"+
-            "O monstro te pega você, te come legal e cê tá mortão agora.\n";
+            return "-Você dá passos firmes em direção à sala "+this.getDescricao()+". \nPassando por um corredor escuro, você encontra a próxima sala, mas quando nela chega já é tarde demais.\n"+
+            "um monstro te pega você, te come legal e cê tá mortão agora.\n";
         }
         else{
             jogador.pegaChave();
-            return super.entrarNaSala(jogador) +"Você vê uma enorme criatura, inconsciente, no chão. \nAo lado dela, há uma chave, a qual você guarda, na esperança que ela possa ser de ajuda.\n";
+            return super.entrarNaSala(jogador) +"-Você vê uma enorme criatura, inconsciente, no chão. \nAo lado dela, há uma chave, a qual você guarda, na esperança que ela possa ser de ajuda.\n";
         }
     }
     
@@ -61,6 +61,6 @@ public class SalaMonstro extends Sala
     @Override
     public String atirarNaSala(Jogador jogador) {
         this.monstro = false;
-        return "Você atira às cegas em direção a porta da " + this.getDescricao() +". \nVocê ouve um terrível urro de dor seguido da respiração monstruosa que passa de ofegante, para fraca, para inexistente em poucos minutos. \nAgora, não há mais som nenhum vindo daquela sala.\n";
+        return "-Você atira às cegas em direção a porta da " + this.getDescricao() +". \nVocê ouve um terrível urro de dor seguido da respiração monstruosa que passa de ofegante, para fraca, para inexistente em poucos minutos. \nAgora, não há mais som nenhum vindo daquela sala.\n";
     }
 }

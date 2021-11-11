@@ -29,7 +29,7 @@ public class SalaSaida extends Sala
      */
     @Override
     public String entrarNaSala(Jogador jogador){
-        return super.entrarNaSala(jogador) +"Você pode ver, também, uma grade trancada com um grande cadeado, que, apesar de velho, parece bem maciço.\n "+
+        return super.entrarNaSala(jogador) +"-Você pode ver, também, uma grade trancada com um grande cadeado, que, apesar de velho, parece bem maciço.\n "+
                     "Você consegue enxergar uma luz tênue, do que parece uma saída, vinda de um túnel atrás da grade.\n"+
                     "Essa pode ser sua chance para a liberdade caso encontre a chave do cadeado.\n";
     }
