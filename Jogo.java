@@ -36,6 +36,7 @@ public class Jogo {
         this.ig = ig;
         
         this.ig.atualizarMapa(mapa.getMapa());
+        jogar();
     }
 
     /**
@@ -46,29 +47,11 @@ public class Jogo {
     }
 
     /**
-     * Imprime informacoes sobre o ambiente atual.
-     */
-    private void imprimirInformacaoSobreAmbiente() {
-//        System.out.println("Voce esta " + jogador.getSalaAtual().getDescricao());
-//
-//        System.out.print("Saidas: " + jogador.getSalaAtual().getSaidaString());
-        String saidaTexto = "Voce esta " + jogador.getSalaAtual().getDescricao() + "<br>" + "Saidas: " + jogador.getSalaAtual().getSaidaString();
-        ig.atualizaSaidaTexto(saidaTexto);
-//        System.out.println();
-    }
-
-    /**
      * Imprime a mensagem de abertura para o jogador.
      */
     private void imprimirBoasVindas() {
-//        System.out.println();
-//        System.out.println("Bem-vindo ao World of Zuul!");
-//        System.out.println("World of Zuul eh um novo jogo de aventura, incrivelmente chato.");
-//        System.out.println("Digite 'ajuda' se voce precisar de ajuda.");
-//        System.out.println();
         ig.atualizaSaidaTexto("Bem-Vindo ao Jogo Fuga da Masmorra, um jogo de aventura cujo seu objetivo é matar o monstro," +
                 " pegar sua chave da masmorra e fugir evitando os diversos perigos <br>");
-        imprimirInformacaoSobreAmbiente();
     }
 
     /**
@@ -91,7 +74,7 @@ public class Jogo {
             break;
         case DESCONHECIDO:
 //            System.out.println("Eu nao entendi o que voce disse...");
-            ig.atualizaSaidaTexto("Eu nao entendi o que voce disse...");
+            ig.atualizaDicas("Eu nao entendi o que voce disse...");
             break;
         case DESMARCAR:
             desmarcarSala(comando);
@@ -111,8 +94,6 @@ public class Jogo {
         }
         if (!jogador.estaVivo()) {
             querSair = true;
-//            System.out.println("GAME OVER!");
-            ig.atualizaSaidaTexto("GAME OVER!");
         }
         return querSair;
     }
@@ -130,7 +111,7 @@ public class Jogo {
 
         jogador.marcarSala(segundaPalavra);
         //System.out.println("Sala " + segundaPalavra + " marcada!");
-        ig.atualizaSaidaTexto("Sala " + segundaPalavra + " marcada!");
+        ig.atualizaDicas("Sala " + segundaPalavra + " marcada!");
         
         ig.atualizarMapa(jogador.getMapa());
         imprimirSalasMarcadas();
@@ -149,7 +130,7 @@ public class Jogo {
 
         jogador.desmarcarSala(segundaPalavra);
         //System.out.println("Sala " + segundaPalavra + " desmarcada!");
-        ig.atualizaSaidaTexto("Sala " + segundaPalavra + " desmarcada!");
+        ig.atualizaDicas("Sala " + segundaPalavra + " desmarcada!");
         
         ig.atualizarMapa(jogador.getMapa());
         imprimirSalasMarcadas();
@@ -160,18 +141,14 @@ public class Jogo {
      * Imprime todas as salas marcadas pelo jogador
      */
     private void imprimirSalasMarcadas() {
-        String salasMarcadas = "";
+        String salasMarcadas = "Salas Marcadas: ";
         ArrayList<String> marcadas = jogador.getMarcadas();
 
         for (String marcada : marcadas) {
             salasMarcadas += marcada+"-";
         }
         // TODO - Enviar até vazia
-        if (!salasMarcadas.equals("")) {
-//            System.out.print("As Salas Marcadas: ");
-//            System.out.println(salasMarcadas);
-            ig.atualizaSalasMarcadas(salasMarcadas);
-        }
+        ig.atualizaSalasMarcadas(salasMarcadas);
     }
 
     /**

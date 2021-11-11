@@ -158,32 +158,35 @@ public class InterfaceGrafica {
 
         try {
             if (jogo.processarComando(comando)) {
-                int n = JOptionPane.showOptionDialog(fJanela,
-                        "Ao clicar em \"OK!\" o jogo será finalizado.","Fim de Jogo",
-                        JOptionPane.PLAIN_MESSAGE,
-                        JOptionPane.QUESTION_MESSAGE,
-                        null,
-                        null,
-                        "Ok!");
-                System.out.println(n);
-                if (n == 0){
-                    fJanela.dispose();
-                }
+                sair();
             }
         }catch (InvalidParameterException e){
-            atualizaSaidaTexto(e.getMessage());
+            atualizaDicas(e.getMessage());
         }
 
 
 
     }
 
+    private void sair() {
+        int ok = JOptionPane.showOptionDialog(fJanela,
+                "Ao clicar em \"OK!\" o jogo será finalizado.","Fim de Jogo",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                null,
+                "Ok!");
+        if (ok == 0){
+            fJanela.dispose();
+        }
+    }
+
     public void atualizaDicas(String sDicas) {
-        lDicas.setText(String.format("<html><pre>%s</pre></html>", sDicas));
+        lDicas.setText(String.format("<html>%s</html>", sDicas));
     }
 
     public void atualizaSalasMarcadas(String sSalasMarcadas) {
-        lMarcacoes.setText(String.format("<html><pre>%s</pre></html>", sSalasMarcadas));
+        lMarcacoes.setText(String.format("<html>%s</html>", sSalasMarcadas));
     }
 
     public void atualizaSaidaTexto(String sInformacao) {
