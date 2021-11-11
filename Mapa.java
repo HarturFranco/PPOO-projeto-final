@@ -96,7 +96,7 @@ public class Mapa {
 
         linha = arq.readLine();
 
-        for (int j = 0; j < adjacentes.length; j++) {
+        for (int j = 1; j < adjacentes.length; j++) {
           if (i >= 1)
             todasSalas.get(id[1]).adicionarSaida(adjacentes[j], todasSalas.get(adjacentes[j]));
 
@@ -105,17 +105,10 @@ public class Mapa {
         linha = arq.readLine();
       }
 
-<<<<<<< HEAD
-      for (String key : todasSalas.keySet()) {
+      for (String key : todasSalas.keySet())
         System.out.println(key + "-> " + todasSalas.get(key).getSaidaString());
-=======
       linha = arq.readLine();
-      while (linha != null) {
-        mapa += linha;
-
-        linha = arq.readLine();
->>>>>>> 902944c97f0be2c443d660a1e9443d932a5bbed0
-      }
+      
       
         while(!linha.equals("-mapa-")){
             linha = arq.readLine();
