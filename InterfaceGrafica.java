@@ -64,10 +64,10 @@ public class InterfaceGrafica {
 
         // TODO - carregar do arquivo texto.
         // mapa
-        
+
 
         lMapa.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 18));
-        lMapa.setPreferredSize(new Dimension(735, 500));
+        lMapa.setMinimumSize(new Dimension(735, 500));
         pane.add(lMapa, BorderLayout.CENTER);
 
         // Salas Marcadas
@@ -78,17 +78,9 @@ public class InterfaceGrafica {
 
         // Dicas
 
-//        lDicas.setPreferredSize(new Dimension(200, 500));
-        lDicas.setAlignmentX(SwingConstants.LEFT);
+
         painelDicas.setPreferredSize(new Dimension(200, 500));
-//            GridBagConstraints gc = new GridBagConstraints();
-//            gc.gridx = 0;
-//            gc.gridy = 0;
-//            gc.anchor = GridBagConstraints.NORTHWEST;
-//            gc.insets = new Insets(2, 0, 0, 2);
-//            painelDicas.add(lDicas, gc);
         painelDicas.add(lDicas);
-//            painelDicas.add(lDicas);
         painelDicas.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         pane.add(painelDicas, BorderLayout.WEST);
 
@@ -107,7 +99,7 @@ public class InterfaceGrafica {
 //            lInformacoes.setPreferredSize(new Dimension(900, 75));
         painelInferior.add(lInformacoes);
         painelInferior.add(tComando);
-        painelInferior.setPreferredSize(new Dimension(1200, 100));
+        painelInferior.setPreferredSize(new Dimension(1135, 100));
         pane.add(painelInferior, BorderLayout.PAGE_END);
 
 
@@ -121,7 +113,7 @@ public class InterfaceGrafica {
         //Create and set up the window.
 
         fJanela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        fJanela.setPreferredSize(new Dimension(1135, 600));
+        fJanela.setSize(new Dimension(1135, 600));
         fJanela.setResizable(true);
         //Set up the content pane.
         addComponentesAoPane(fJanela.getContentPane());
@@ -157,15 +149,15 @@ public class InterfaceGrafica {
     }
 
     public void atualizaDicas(String sDicas) {
-        lDicas.setText("<html>" + sDicas + "</html>");
+        lDicas.setText(String.format("<html><div style=\"width:%dpx;\">%s</div></html>", painelDicas.getWidth() , sDicas));
     }
 
     public void atualizaSalasMarcadas(String sSalasMarcadas) {
-        lMarcacoes.setText(sSalasMarcadas);
+        lMarcacoes.setText(String.format("<html><div style=\"width:%dpx;\">%s</div></html>", painelMarcacoes.getWidth() , sSalasMarcadas));
     }
 
     public void atualizaSaidaTexto(String sInformacao) {
-        lInformacoes.setText(sInformacao);
+        lInformacoes.setText(String.format("<html><div style=\"width:%dpx;\">%s</div></html>", painelInferior.getWidth() , sInformacao));
     }
 
     public void atualizarMapa(String sMapa) {
