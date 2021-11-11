@@ -28,11 +28,10 @@ public class Jogo {
      */
     public Jogo(InterfaceGrafica ig) {
         Mapa mapa = new Mapa("mapa.txt");
-        jogador = new Jogador(mapa);
+        jogador = new Jogador(mapa, mapa.getSalaInicio());
 
         analisador = new Analisador();
 
-        jogador.setSalaAtual((mapa.getSalaInicio()));
         this.ig = ig;
         
         this.ig.atualizarMapa(mapa.getMapa());
@@ -92,7 +91,7 @@ public class Jogo {
             querSair = sair(comando);
             break;
         }
-        if (!jogador.estaVivo()) {
+        if (!jogador.estaVivo() || jogador.estaLivre()) {
             querSair = true;
         }
         return querSair;
@@ -157,7 +156,14 @@ public class Jogo {
      */
     private void fugir(Comando comando) {
 
-        ig.atualizaSaidaTexto(jogador.fugir());
+        String saida = jogador.fugir();
+
+        if(jogador.estaLivre()){
+            ig.atualizaSaidaTexto(saida);
+        }else {
+            ig.atualizaDicas(saida);
+        }
+
 
     }
 
@@ -168,7 +174,6 @@ public class Jogo {
      * lista de palavras de comando
      */
     private void imprimirAjuda() {
-
 //        System.out.println("Suas palavras de comando sao:");
 //        System.out.println(analisador.getComandos());
         ig.atualizaDicas("suas palavras de comando são: <br>" + analisador.getComandos());
@@ -199,7 +204,13 @@ public class Jogo {
             throw new InvalidParameterException("Artirar no quê?");
         }
         String direcao = comando.getSegundaPalavra();
-        ig.atualizaSaidaTexto(jogador.atirar(direcao));
+
+        if (jogador.temArma()){
+            ig.atualizaSaidaTexto(jogador.atirar(direcao));
+        } else {
+            ig.atualizaDicas(jogador.atirar(direcao));
+        }
+
     }
 
     /**

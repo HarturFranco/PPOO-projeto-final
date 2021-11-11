@@ -34,6 +34,7 @@ public class InterfaceGrafica {
     private Jogo jogo;
     private Analisador analisador;
 
+
     public InterfaceGrafica() {
         analisador = new Analisador();
 
@@ -155,6 +156,7 @@ public class InterfaceGrafica {
 
     private void despachaComando(String actionCommand) {
         // apaga comando do textArea
+        atualizaDicas("");
         tComando.setText("");
 
         Comando comando = analisador.pegarComando(actionCommand);

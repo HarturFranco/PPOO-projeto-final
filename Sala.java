@@ -91,7 +91,7 @@ public class Sala {
      *         possíveis sons/ brisas vindos das salas vizinhas.
      */
     public String entrarNaSala(Jogador jogador) {
-        String s = "-Você dá passos firmes em direção à " + this.getDescricao()
+        String s = "-Você dá passos firmes em direção à sala " + this.getDescricao()
                 + ". \nPassando por um corredor escuro, consegue chegar ao outro lado.\n";
         s = s + "-Ao chegar, você percebe que tochas iluminam as portas das salas " + this.getSaidaString() + "\n";
 

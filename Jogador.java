@@ -21,20 +21,22 @@ public class Jogador {
     private boolean vivo;
     private boolean chave;
     private boolean arma;
+    private boolean livre;
     private Sala salaAtual;
     private Mapa mapa;
 
-    public Jogador(Mapa mapa) {
+    /**
+     *
+     * @param mapa
+     * @param salaInicio
+     */
+    public Jogador(Mapa mapa, Sala salaInicio) {
         this.chave = false;
         this.arma = true;
         this.vivo = true;
+        this.livre = false;
         this.mapa = mapa;
-        // TODO - Como definir isso aqui?
-        this.salaAtual = null;
-    }
-
-    public void setSalaAtual(Sala salaAtual) {
-        this.salaAtual = salaAtual;
+        this.salaAtual = salaInicio;
     }
 
     // TODO - Retornar Copia do objeto para manter encapsulamento?
@@ -45,7 +47,7 @@ public class Jogador {
     public boolean temChave() {
         return chave;
     }
-    
+
     public void pegaChave(){
         chave = true;
     }
@@ -57,6 +59,11 @@ public class Jogador {
     public boolean estaVivo() {
         return vivo;
     }
+
+    public boolean estaLivre() {
+        return this.livre;
+    }
+
     public void setMorto(){
         vivo = false;
     }
@@ -66,7 +73,6 @@ public class Jogador {
      * @param direcao eh a sala em que se deseja atirar
      * @return narrativa ao atirar na sala
      */
-    // TODO - passar "this" para atirar na sala. (nome do metodo de sala ta estranho tbm?)
     public String atirar(String direcao) {
         if (!mapa.existeSala(direcao)) {
             throw new InvalidParameterException("Essa sala não existe!");
@@ -76,7 +82,7 @@ public class Jogador {
 
         if (alvo == null) {
             return "Você não tem acesso a essa sala.";
-        } else if (!arma) {
+        } else if (!temArma()) {
             return "A sua arma não tem mais balas";
         } else {
             arma = false;
@@ -148,10 +154,13 @@ public class Jogador {
         // TODO - Usar Excecao?
         if (temChave()) {
             if (salaAtual instanceof SalaSaida) {
+                this.livre = true;
                 return "Você conseguiu Sair da Masmorra, parabéns!!!!";
             }
             return "Você não está na sala de saida!";
         }
         return "Você não possui a chave!";
     }
+
+
 }

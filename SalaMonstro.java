@@ -29,7 +29,7 @@ public class SalaMonstro extends Sala
      */
     public String getSom(){
         if( this.monstro)
-            return "Você consegue ouvir uma respiração mostruosa vinda de alguma das salas vizinhas, mas você não sabe ao certo de qual.\n";
+            return "-Você consegue ouvir uma respiração mostruosa vinda de alguma das salas vizinhas, mas você não sabe ao certo de qual.\n";
         else
             return "";
     }
@@ -47,9 +47,12 @@ public class SalaMonstro extends Sala
             return "-Você dá passos firmes em direção à sala "+this.getDescricao()+". \nPassando por um corredor escuro, você encontra a próxima sala, mas quando nela chega já é tarde demais.\n"+
             "um monstro te pega você, te come legal e cê tá mortão agora.\n";
         }
-        else{
+        else if (!jogador.temChave()){
             jogador.pegaChave();
             return super.entrarNaSala(jogador) +"-Você vê uma enorme criatura, inconsciente, no chão. \nAo lado dela, há uma chave, a qual você guarda, na esperança que ela possa ser de ajuda.\n";
+        }
+        else {
+            return super.entrarNaSala(jogador) +"-Você vê uma enorme criatura, inconsciente, no chão.\n";
         }
     }
     

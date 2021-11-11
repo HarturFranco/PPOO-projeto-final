@@ -1,3 +1,6 @@
+/**
+ *
+ */
 public enum PalavraComando
 {
     // Um valor para cada palavra de comando
