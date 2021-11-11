@@ -129,8 +129,10 @@ public class Jogo {
         String segundaPalavra = comando.getSegundaPalavra();
 
         jogador.marcarSala(segundaPalavra);
-//        System.out.println("Sala " + segundaPalavra + " marcada!");
+        //System.out.println("Sala " + segundaPalavra + " marcada!");
         ig.atualizaSaidaTexto("Sala " + segundaPalavra + " marcada!");
+        
+        ig.atualizarMapa(jogador.getMapa());
         imprimirSalasMarcadas();
     }
 
@@ -146,8 +148,10 @@ public class Jogo {
         String segundaPalavra = comando.getSegundaPalavra();
 
         jogador.desmarcarSala(segundaPalavra);
-//        System.out.println("Sala " + segundaPalavra + " desmarcada!");
+        //System.out.println("Sala " + segundaPalavra + " desmarcada!");
         ig.atualizaSaidaTexto("Sala " + segundaPalavra + " desmarcada!");
+        
+         ig.atualizarMapa(jogador.getMapa());
         imprimirSalasMarcadas();
     }
 
@@ -160,7 +164,7 @@ public class Jogo {
         ArrayList<String> marcadas = jogador.getMarcadas();
 
         for (String marcada : marcadas) {
-            salasMarcadas += marcada;
+            salasMarcadas += marcada+"-";
         }
         // TODO - Enviar até vazia
         if (!salasMarcadas.equals("")) {

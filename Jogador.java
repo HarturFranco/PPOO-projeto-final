@@ -123,6 +123,15 @@ public class Jogador {
     public ArrayList<String> getMarcadas() {
         return this.mapa.getSalasMarcadas();
     }
+    
+       /**
+     * metodo retorna a arte deo mapa do jogador
+     * @return a arte do mapa
+     */
+    // TODO - seria legal retornar uma string?
+    public String getMapa() {
+        return mapa.getMapa();
+    }
 
     /**
      * executa acao de fulga.

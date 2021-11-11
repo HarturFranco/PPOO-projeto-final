@@ -3,6 +3,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.security.InvalidParameterException;
 
 /**
  * Classe Mapa - faz as operacoes necessarias ao mapa.
@@ -19,15 +20,17 @@ import java.util.HashMap;
  */
 
 public class Mapa {
-  private String mapa;
+  private char[][] mapa;
   private Sala salaInicio;
 
   private HashMap<String, Sala> todasSalas;
   private ArrayList<String> salasMarcadas;
+  private HashMap<String, int[]> cordenadas; 
 
   public Mapa(String nomeMapa) {
-    this.mapa = "";
     this.todasSalas = new HashMap<>();
+    this.salasMarcadas = new ArrayList<>();
+    this.cordenadas = new HashMap<>();
 
     this.iniciarMapa(nomeMapa);
   }
@@ -36,7 +39,6 @@ public class Mapa {
    * Cria todos as Salas e liga as saidas deles
    */
   private void iniciarMapa(String nomeMapa) {
-    todasSalas = new HashMap<>();
     try (BufferedReader arq = new BufferedReader(new FileReader(nomeMapa))) {
 
       String linha = arq.readLine();
@@ -106,14 +108,38 @@ public class Mapa {
       for (String key : todasSalas.keySet()) {
         System.out.println(key + "-> " + todasSalas.get(key).getSaidaString());
       }
-
-      linha = arq.readLine();
-      while (linha != null) {
-        mapa += linha;
-
-        linha = arq.readLine();
-      }
       
+        while(!linha.equals("-mapa-")){
+            linha = arq.readLine();
+            System.out.println(linha);
+        }
+            
+        linha = arq.readLine();
+        String[] linhas = linha.split(" ");
+        int n0 = Integer.parseInt(linhas[0]);
+        
+        mapa = new char[n0][];
+        linha = arq.readLine();
+        linha = arq.readLine();
+        
+        
+        for(int i = 0; i < n0; i++){
+            mapa[i] = linha.toCharArray();
+            linha = arq.readLine();
+        }
+        
+        int[] aux;
+        for(int i = 0; i < numeroSalas; i++){
+            linha = arq.readLine();
+            
+            aux = new int[2];
+            linhas = linha.split(" ");
+            aux[0] =  Integer.parseInt(linhas[2]);
+            aux[1] =  Integer.parseInt(linhas[3]);
+            System.out.println("SALA: "+linhas[1]+"->"+linhas[2]+","+linhas[3]);            
+            cordenadas.put(linhas[1], aux);
+        }
+        
     } catch (IOException e) {
       System.out.println("Erro na leitura do mapa");
     } catch (Exception e) {
@@ -121,8 +147,25 @@ public class Mapa {
     }
   }
 
+
+    private void trocaRecurs(char ant, char nov, int x, int y){
+        if(mapa[x][y] == ant){
+            mapa[x][y] = nov;
+            trocaRecurs(ant,  nov, x+1, y);
+            trocaRecurs(ant,  nov, x, y+1);
+            trocaRecurs(ant,  nov, x-1, y);
+            trocaRecurs(ant,  nov, x, y-1);
+        }
+    }
+
   public String getMapa() {
-    return mapa;
+    String s = "<html><pre>";
+    for(int i = 0; i < mapa.length; i++)
+    {
+        System.out.println(mapa[i]);
+        s += new String(mapa[i]) + "<br>";
+    }
+    return s+"</pre></html>";
   }
 
   public Sala getSalaInicio() {
@@ -136,10 +179,21 @@ public class Mapa {
   }
 
   public void marcar(String codSala) {
+    if(!existeSala(codSala))
+        throw new InvalidParameterException("Essa sala não existe!");
+        
+    int[] aux = cordenadas.get(codSala);
+    System.out.println(aux[0]);
+    trocaRecurs(' ', '/', aux[0], aux[1]);
     salasMarcadas.add(codSala);
   }
 
   public void desmarcar(String codSala) {
+    if(!existeSala(codSala))
+        throw new InvalidParameterException("Essa sala não existe!");
+        
+    int[] aux = cordenadas.get(codSala);
+    trocaRecurs('/', ' ', aux[0], aux[1]);
     salasMarcadas.remove(codSala);
   }
 
