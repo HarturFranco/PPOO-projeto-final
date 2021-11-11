@@ -41,13 +41,14 @@ public class SalaMonstro extends Sala
      *  que não apresenta risco ao jogador e o dá a chave da saída.
      */
     @Override
-    public String entrarNaSala(){
+    public String entrarNaSala(Jogador jogador) {
         if( this.monstro){
+            jogador.setMorto();
             return "Você dá passos firmes em direção à "+this.getDescricao()+". \n Passando por um corredor escuro, você encontra a próxima sala, mas quando nela chega já é tarde demais.\n"+
             "O monstro te pega você, te come legal e cê tá mortão agora.\n";
         }
         else{
-            return super.entrarNaSala() +"Você vê uma enorme criatura, inconsciente, no chão. \nAo lado dela, há uma chave, a qual você guarda, na esperança que ela possa ser de ajuda.\n";
+            return super.entrarNaSala(jogador) +"Você vê uma enorme criatura, inconsciente, no chão. \nAo lado dela, há uma chave, a qual você guarda, na esperança que ela possa ser de ajuda.\n";
         }
     }
     
@@ -57,7 +58,7 @@ public class SalaMonstro extends Sala
      *  jogador o mata e torna a sala segura para a entrada.
      */
     @Override
-    public String atirarNaSala(){
+    public String atirarNaSala(Jogador jogador) {
         this.monstro = false;
         return "Você atira às cegas em direção a porta da " + this.getDescricao() +". Você ouve um terrível urro de dor seguido da respiração monstruosa que passa de ofegante, para fraca, para inexistente em poucos minutos.\n Agora, não há mais som nenhum vindo daquela sala.\n";
     }

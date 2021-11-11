@@ -34,7 +34,8 @@ public class SalaBuraco extends Sala
      *  caso entre nessa sala.
      */
     @Override
-    public String entrarNaSala(){
+    public String entrarNaSala(Jogador jogador) {
+        jogador.setMorto();
         return "Você dá passos firmes em direção à "+this.getDescricao()+". \n Passando por um corredor escuro, em um momento o chão parece sumir debaixo dos seus pés.\n"+
             "Quando você se dá conta do ocorrido,  já está em queda livre.\n" +
             "Enquanto você tem seu último sonho com a liberdade, tão de repente quanto ela começou, a queda termina.\n"+

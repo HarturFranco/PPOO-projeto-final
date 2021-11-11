@@ -34,7 +34,8 @@ public class SalaArmadilha extends Sala
      *  e ao ser disparada mata o jogador e termina o jogo.
      */
     @Override
-    public String entrarNaSala(){
+    public String entrarNaSala(Jogador jogador) {
+        jogador.setMorto();
         return "Você dá passos firmes em direção à "+this.getDescricao()+". \n Passando por um corredor escuro, você pisa em falso e sente algo se mover embaixo de seus pés.\n"+
             "Sem tempo de reagir, você é atingido em seu peito por uma longa estaca de madeira, vai ao chão e dá os ultimos suspiros sob som das engrenagens da armadilha se movimentando.\n";
     }

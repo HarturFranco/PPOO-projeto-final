@@ -53,7 +53,9 @@ public class Jogador {
     public boolean estaVivo() {
         return vivo;
     }
-
+    public void setMorto(){
+        vivo = false;
+    }
 
     /**
      * executa a acao de entrar em uma sala adjacente
@@ -74,7 +76,7 @@ public class Jogador {
             return "A sua arma não tem mais balas";
         } else {
             arma = false;
-            return alvo.atirarNaSala();
+            return alvo.atirarNaSala(this);
         }
     }
 
@@ -95,7 +97,7 @@ public class Jogador {
             return "Você não tem acesso a essa sala.";
         } else {
             salaAtual = proximaSala;
-            return salaAtual.entrarNaSala();
+            return salaAtual.entrarNaSala(this);
         }
     }
 

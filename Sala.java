@@ -90,7 +90,7 @@ public class Sala {
      *         sala. nesse caso, sendo uma sala segura ele vê as outras salas e ouve
      *         possíveis sons/ brisas vindos das salas vizinhas.
      */
-    public String entrarNaSala() {
+    public String entrarNaSala(Jogador jogador) {
         String s = "Você dá passos firmes em direção à " + this.getDescricao()
                 + ". \n Passando por um corredor escuro, consegue chegar ao outro lado.\n";
         s = s + "Ao chegar, você percebe que tochas iluminam as portas das salas: " + this.getSaidaString() + "\n";
@@ -110,7 +110,8 @@ public class Sala {
      *         última bala e atrai o monstro para si com o barulho do tiro, fazendo
      *         com que o jogo acabe.
      */
-    public String atirarNaSala() {
+    public String atirarNaSala(Jogador jogador) {
+        jogador.setMorto();
         return "Você atira às cegas em direção a porta da " + this.getDescricao()
                 + ".\n Após o estouro da arma, seus ovidos zunem por um breve momento.\n "
                 + "Sua audição volta logo a tempo de ouvir o os de cascos pesados rapidamente se aproximando de você.\n"
