@@ -103,10 +103,6 @@ public class Mapa {
         linha = arq.readLine();
       }
 
-      for (String key : todasSalas.keySet()) {
-        System.out.println(key + "-> " + todasSalas.get(key).getSaidaString());
-      }
-
       linha = arq.readLine();
       while (linha != null) {
         mapa += linha;
