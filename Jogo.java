@@ -27,8 +27,6 @@ public class Jogo {
      * Cria o jogo e incializa seu mapa interno.
      */
     public Jogo() {
-        Mapa mapa = new Mapa("mapa.txt");
-        jogador = new Jogador(mapa, mapa.getSalaInicio());
         analisador = new Analisador();
         jogar();
     }
@@ -39,7 +37,17 @@ public class Jogo {
     public void jogar() {
         this.ig = new InterfaceGrafica(this);
         ig.exibir();
-        imprimirBoasVindas();
+
+        try {
+            Mapa mapa = new Mapa("mapa.txt");
+            this.jogador = new Jogador(mapa, mapa.getSalaInicio());
+            imprimirBoasVindas();
+        } catch (Exception e){
+            ig.sair("Erro", e.getMessage());
+        }
+
+
+
     }
 
     /**
