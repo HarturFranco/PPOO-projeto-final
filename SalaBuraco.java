@@ -37,7 +37,7 @@ public class SalaBuraco extends Sala
     @Override
     public String entrarNaSala(Jogador jogador) {
         jogador.setMorto();
-        return "-Você dá passos firmes em direção à sala "+this.getDescricao()+
+        return "-Você dá passos firmes em direção à sala "+this.getCodigo()+
             ". \nPassando por um corredor escuro, em um momento o chão parece sumir debaixo dos seus pés.\n"+
             "Quando você se dá conta do ocorrido,  já está em queda livre.\n" +
             "Enquanto você tem seu último sonho com a liberdade, tão de repente quanto ela começou, a queda termina.\n"+
