@@ -1,10 +1,10 @@
 /**
- * Classe SalaBuraco - uma sala perigosa em um jogo adventure.
+ * Classe SalaBuraco - uma sala segura em um jogo adventure.
  *
  * Esta classe eh parte da aplicacao "Fuga da Masmorra".
  * "Fuga da Masmorral" eh um jogo de aventura muito simples, baseado em texto.  
  *
- * A classe "SalaBuraco" é a classe que define um ambiente seguro
+ * A classe "SalaSaida" é a classe que define um ambiente seguro
  *  em que o jogador pode entrar. Nela não há perigo, mas ela se destaca 
  *  das salas básicas por nela haver um túnel que leva à saída.
  * 
@@ -19,13 +19,14 @@ public class SalaSaida extends Sala
     }
     
     /**
+     * Dá uma descrição e faz alterações que acontecem quando o jogador entra
+     * nessa sala. Semelhante à classe mãe, mas com adições graças a ser a sala
+     * da saída de fuga.
+     * 
+     * @param jogador objeto do jogador que entrará na sala
      * @return String mostrando o que o jogador vê, ouve e sente ao entrar nessa sala.
      * nesse caso, sendo uma sala segura ele vê as outras salas e ouve possíveis sons/ brisas
      *  vindos das salas vizinhas.
-     * 
-     * Mas, já que essa é a sala que leva à saída, o jogador também vê o túnel da saída,
-     *  que o leva para completar o jogo e grade com cadeado
-     *  que o impede de prosseguir sem a chave.
      */
     @Override
     public String entrarNaSala(Jogador jogador){

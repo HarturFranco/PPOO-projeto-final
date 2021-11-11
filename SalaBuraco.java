@@ -28,9 +28,10 @@ public class SalaBuraco extends Sala
     }
     
     /**
+     * @param jogador objeto do jogador que entrará na sala
      * @return String com o que acontece ao entrar na sala.
      * nesse caso, já o corredor em direção à sala contem uma
-     *  um profundo buraco, onde o jogador cai e peder o jogo
+     *  um profundo buraco, onde o jogador cai e pede o jogo
      *  caso entre nessa sala.
      */
     @Override

@@ -22,7 +22,7 @@ public class Sala {
     /**
      * Cria uma sala com a "descricao" passada. Inicialmente, ela nao tem saidas.
      * "descricao" eh algo como "Sala 01" ou "Sala 02"
-     * @param código da sala inciada.
+     * @param codSala código da sala inciada.
      */
     public Sala(String descricao) {
         this.descricao = descricao;
@@ -32,8 +32,8 @@ public class Sala {
     /**
      * Define uma saida desse ambiente
      * 
-     * @param código da saida.
-     * @param objeto da sala adicionada como saída
+     * @param codSala código da saida.
+     * @param adjacente objeto da sala adicionada como saída
      */
     public void adicionarSaida(String cordenada, Sala adjacente) {
         saidas.put(cordenada, adjacente);
@@ -50,7 +50,7 @@ public class Sala {
      * Retorna a sala para qual o jogador vai. se essa sala não é acssível, retorna
      * null.
      * 
-     * @param cordenada, cordenada da sala que o jogador quer entrar.
+     * @param codSala código da sala que o jogador quer entrar.
      * @return A sala para qual o jogador irá.
      */
     public Sala getSaida(String cordenada) {
@@ -58,21 +58,22 @@ public class Sala {
     }
 
     /**
+     * string com todas as salas vizinhas dessa
      * 
-     * @return A descrição das salas adjacentes. por exemplo 'adjacentes: sala01,
+     * @return Os códigos das salas adjacentes. por exemplo 'adjacentes: sala01,
      *         sala02, sala03'".
      */
-
     public String getSaidaString() {
         String strSaidas = "";
         for (String s : saidas.keySet()) {
             strSaidas += s + " ";
         }
-
         return strSaidas;
     }
 
     /**
+     * Os sons ouvidos emitidos por essa sala
+     * 
      * @return String com o sons ou brisas que essa sala leva às suas salas vizinhas
      *         por exemplo "uma brisa fria" nesse caso, a sala não produz nada de
      *         anormal, então retorna uma string vazia.
@@ -82,6 +83,10 @@ public class Sala {
     }
 
     /**
+     * Dá uma descrição e faz alterações que acontecem quando o jogador entra
+     * nessa sala.
+     * 
+     * @param jogador objeto do jogador que entrará na sala
      * @return String mostrando o que o jogador vê, ouve e sente ao entrar nessa
      *         sala. nesse caso, sendo uma sala segura ele vê as outras salas e ouve
      *         possíveis sons/ brisas vindos das salas vizinhas.
@@ -101,6 +106,10 @@ public class Sala {
     }
 
     /**
+     * Dá uma descrição e faz alterações que acontecem quando o jogador atira
+     * em direção a essa sala.
+     * 
+     * @param jogador objeto do jogador que entrará na sala
      * @return String com o que acontece ao atirar em direção à sala. nesse caso, a
      *         sala não contem o monstro vivo e, ao atirar nela, o jogador gasta sua
      *         última bala e atrai o monstro para si com o barulho do tiro, fazendo

@@ -35,6 +35,7 @@ public class SalaMonstro extends Sala
     }
     
     /**
+     * @param jogador objeto do jogador que entrará na sala
      * @return String com o que acontece ao entrar na sala.
      * nesse caso, a sala pode conter um monstro vivo, e então
      *  devorando o jogador ao entrar ou conter um monstro morto,
@@ -57,6 +58,7 @@ public class SalaMonstro extends Sala
     }
     
     /**
+     * @param jogador objeto do jogador que entrará na sala
      * @return String com o que acontece ao atirar em direção à sala.
      * nesse caso, a sala contem um monstro vivo e, ao atirar nela, o 
      *  jogador o mata e torna a sala segura para a entrada.

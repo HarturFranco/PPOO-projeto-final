@@ -28,6 +28,7 @@ public class SalaArmadilha extends Sala
     }
     
     /**
+     * @param jogador objeto do jogador que entrará na sala
      * @return String com o que acontece ao entrar na sala.
      * nesse caso, o corredor em direção à sala contem uma
      *  armadilha que dispara na entrada do jogador
