@@ -45,6 +45,10 @@ public class Jogador {
     public boolean temChave() {
         return chave;
     }
+    
+    public void pegaChave(){
+        chave = true;
+    }
 
     public boolean temArma() {
         return arma;

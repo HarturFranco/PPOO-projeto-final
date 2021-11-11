@@ -48,6 +48,7 @@ public class SalaMonstro extends Sala
             "O monstro te pega você, te come legal e cê tá mortão agora.\n";
         }
         else{
+            jogador.pegaChave();
             return super.entrarNaSala(jogador) +"Você vê uma enorme criatura, inconsciente, no chão. \nAo lado dela, há uma chave, a qual você guarda, na esperança que ela possa ser de ajuda.\n";
         }
     }
