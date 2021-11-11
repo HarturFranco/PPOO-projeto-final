@@ -6,14 +6,15 @@ import java.util.HashMap;
 import java.security.InvalidParameterException;
 
 /**
- * Classe Mapa - faz as operacoes necessarias ao mapa.
- * <p>
+ * Classe Mapa - faz as operacoes necessarias ao mapa e guarda suas informações.
+ * 
  * Esta classe eh parte da aplicacao "Fuga da Masmorra". "Fuga da Masmorral" eh
  * um jogo de aventura muito simples, baseado em texto.
- * <p>
+ * 
  * A classe "Mapa" é a classe que define o mapa onde o jogador poderá se
- * movimentar. Nela é definido a sala inicial, todas as salas e as salas
- * marcadas a partir de uma aqruivo de texto.
+ * movimentar. Nela são definidas todas as salas e as salas
+ * marcadas a partir de uma aqruivo de texto e como elas são 
+ * mostradas na interface.
  *
  * @author Alexandre Rabello, Arthur Franco, Felipe Godoi e João Paulo Paiva.
  * @version 2021.11.06
