@@ -9,11 +9,11 @@ tipo
 
 id 3
 adjacentes 2 8 4
-tipo monstro
+tipo 
 
 id 4
 adjacentes 3 9 10
-tipo 
+tipo armadilha
 
 id 5
 adjacentes 1 6 11
@@ -21,7 +21,7 @@ tipo
 
 id 6
 adjacentes 1 5 12
-tipo buraco
+tipo armadilha
 
 id 7
 adjacentes 
@@ -29,11 +29,11 @@ tipo
 
 id 8
 adjacentes 3 14
-tipo 
+tipo buraco
 
 id 9
 adjacentes 4 12 15
-tipo armadilha
+tipo buraco
 
 id 10
 adjacentes 4 9 16
@@ -49,7 +49,7 @@ tipo
 
 id 13
 adjacentes 12 14 19
-tipo armadilha
+tipo 
 
 id 14
 adjacentes 8 13 20
@@ -57,7 +57,7 @@ tipo
 
 id 15
 adjacentes 9 21 16
-tipo buraco
+tipo armadilha
 
 id 16
 adjacentes 10 15 22
@@ -69,11 +69,11 @@ tipo
 
 id 18
 adjacentes 17 19 23
-tipo armadilha
+tipo monstro
 
 id 19
 adjacentes 13 18 20
-tipo 
+tipo buraco
 
 id 20
 adjacentes 14 19 25
@@ -89,7 +89,7 @@ tipo
 
 id 23
 adjacentes 17 18 24
-tipo 
+tipo buraco
 
 id 24
 adjacentes 23 25
@@ -97,7 +97,7 @@ tipo
 
 id 25
 adjacentes 20 23 26
-tipo buraco
+tipo 
 
 id 26
 adjacentes 21 22 25
