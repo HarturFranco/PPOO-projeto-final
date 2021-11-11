@@ -141,7 +141,7 @@ public class Jogo {
      * Imprime todas as salas marcadas pelo jogador
      */
     private void imprimirSalasMarcadas() {
-        String salasMarcadas = "Salas Marcadas: ";
+        String salasMarcadas = "";
         ArrayList<String> marcadas = jogador.getMarcadas();
 
         for (String marcada : marcadas) {
@@ -171,7 +171,7 @@ public class Jogo {
 
 //        System.out.println("Suas palavras de comando sao:");
 //        System.out.println(analisador.getComandos());
-        ig.atualizaDicas("Suas Palavras de <br> comando são: <br>" + analisador.getComandos());
+        ig.atualizaDicas("suas palavras de comando são: <br>" + analisador.getComandos());
     }
 
     /**

@@ -41,7 +41,7 @@ public class InterfaceGrafica {
         this.lTitulo = new JLabel("Fuga da Masmorra.");
         this.lMapa = new JLabel();
         this.lMarcacoes = new JLabel("Marcações: ");
-        this.lDicas = new JLabel("Dicas:");
+        this.lDicas = new JLabel("<html>Dicas:</html>");
         this.lInformacoes = new JLabel("<html>Bem-Vindo ao Jogo Fuga da Masmorra, um jogo de aventura cujo seu objetivo é matar o monstro," +
                 "pegar sua chave e fugir da masmorra evitando seus diversos perigos; </html>");
         this.painelInferior = new JPanel();
@@ -71,6 +71,7 @@ public class InterfaceGrafica {
         pane.add(lMapa, BorderLayout.CENTER);
 
         // Salas Marcadas
+        painelMarcacoes.setLayout(new BoxLayout(painelMarcacoes, BoxLayout.Y_AXIS));
         painelMarcacoes.setPreferredSize(new Dimension(200, 500));
         painelMarcacoes.add(lMarcacoes);
         painelMarcacoes.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -80,7 +81,7 @@ public class InterfaceGrafica {
 
         painelDicas.setLayout(new BoxLayout(painelDicas, BoxLayout.Y_AXIS));
         painelDicas.setPreferredSize(new Dimension(200, 500));
-        lDicas.setMaximumSize(new Dimension(200, 500));
+//        lDicas.setMaximumSize(new Dimension(200, 500));
         painelDicas.add(lDicas);
         painelDicas.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         pane.add(painelDicas, BorderLayout.WEST);
@@ -96,6 +97,8 @@ public class InterfaceGrafica {
 
         lInformacoes.setPreferredSize(new Dimension(1135, 150));
         lInformacoes.setMaximumSize(new Dimension(1135, 150));
+        lInformacoes.setVerticalAlignment(JLabel.TOP);
+        lInformacoes.setVerticalTextPosition(JLabel.TOP);
         painelInferior.add(lInformacoes);
 
         JPanel painelInput = new JPanel();
@@ -182,11 +185,11 @@ public class InterfaceGrafica {
     }
 
     public void atualizaDicas(String sDicas) {
-        lDicas.setText(String.format("<html>%s</html>", sDicas));
+        lDicas.setText(String.format("<html>Dicas: %s</html>", sDicas));
     }
 
     public void atualizaSalasMarcadas(String sSalasMarcadas) {
-        lMarcacoes.setText(String.format("<html>%s</html>", sSalasMarcadas));
+        lMarcacoes.setText(String.format("<html>Salas Marcadas: %s</html>", sSalasMarcadas));
     }
 
     public void atualizaSaidaTexto(String sInformacao) {
