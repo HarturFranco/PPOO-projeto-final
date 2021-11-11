@@ -161,9 +161,6 @@ public class Mapa {
      * @param nov caracter que substituirá
      * @param x valor da cordenada x do mapa
      * @param y valor da cordenada y do mapa
-     * @return String mostrando o que o jogador vê, ouve e sente ao entrar nessa
-     *         sala. nesse caso, sendo uma sala segura ele vê as outras salas e ouve
-     *         possíveis sons/ brisas vindos das salas vizinhas.
      */
     private void trocaUnic(char ant, char nov, int x, int y) {
         if (mapa[x][y] == ant)
@@ -172,15 +169,12 @@ public class Mapa {
 
     /**
      * Troca todos caracteres iguais adjacentes
-     *  por outro do mapa visual
+     *  por outros do mapa visual
      *
      * @param ant caracter a ser trocado
      * @param nov caracter que substituirá
      * @param x valor da cordenada x do mapa
      * @param y valor da cordenada y do mapa
-     * @return String mostrando o que o jogador vê, ouve e sente ao entrar nessa
-     *         sala. nesse caso, sendo uma sala segura ele vê as outras salas e ouve
-     *         possíveis sons/ brisas vindos das salas vizinhas.
      */
     private void trocaRecurs(char ant, char nov, int x, int y) {
         if (mapa[x][y] == ant) {
@@ -192,6 +186,13 @@ public class Mapa {
         }
     }
 
+
+    /**
+     * Retorna o mapa visual pra apresentação
+     *
+     * @return String com o mapa visual já
+     *  configurado para apresentação em html
+     */
     public String getMapa() {
         String s = "<html><pre>";
         for (int i = 0; i < mapa.length; i++) {
@@ -201,16 +202,38 @@ public class Mapa {
         return s + "</pre></html>";
     }
 
+    /**
+     * Retorna a sala onde o jogador começa
+     *
+     * @return objeto da sala onde o jogador
+     * começa.
+     */
     public Sala getSalaInicio() {
         return salaInicio;
     }
 
+
+    /**
+     * Diz se uma determinada sala existe no mapa
+     * 
+     * @param codSala código da sala procurada
+     * @return boleano dizendo se a sala está 
+     * no mapa
+     */
     public boolean existeSala(String codSala) {
         if (todasSalas.get(codSala) != null)
             return true;
         return false;
     }
 
+    /**
+     * Marca uma sala como suspeita/perigosa.
+     *  Uma vez marcada a sala vira suspeita(╱)
+     *  uma sala suspeita marcada novamente
+     *  se torna uma sala perigosa(╳) no mapa visual.
+     * 
+     * @param codSala código da sala a ser marcada
+     */
     public void marcar(String codSala) {
         if (!existeSala(codSala))
             throw new InvalidParameterException("Essa sala não existe!");
@@ -225,6 +248,15 @@ public class Mapa {
         }
     }
 
+
+    /**
+     * Desmarca uma sala como suspeita/perigosa.
+     *  Ao ser desmarcada, uma sala suspeita(╱) ou
+     *  perigosa(╳) volta ao normal(espaços em branco)
+     *  no mapa visual.
+     * 
+     * @param codSala código da sala a ser marcada
+     */
     public void desmarcar(String codSala) {
         if (!existeSala(codSala))
             throw new InvalidParameterException("Essa sala não existe!");
@@ -239,6 +271,16 @@ public class Mapa {
         salasMarcadas.remove(codSala);
     }
 
+
+    /**
+     * Troca o marcador que representa o jogador(☺)
+     *  de uma sala para a outra no mapa visual.
+     * 
+     * @param codSalaAnt código da sala
+     *  de onde o jogador vem
+     * @param codSalaNov código da sala
+     *  para onde o jogador vai
+     */
     public void moveMarcador(String codSalaAnt, String codSalaNov) {
         int[] aux = cordenadas.get(codSalaAnt);
         trocaUnic('☺', ' ', aux[0], aux[1]);
@@ -249,6 +291,10 @@ public class Mapa {
         trocaUnic('╳', '☺', aux[0], aux[1]);
     }
 
+    /**
+     *  Retorna as salas que estão como marcadas pelo jogador
+     * @return 
+     */
     public ArrayList<String> getSalasMarcadas() {
         return salasMarcadas;
     }

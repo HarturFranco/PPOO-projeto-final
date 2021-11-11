@@ -64,7 +64,6 @@ public class Sala {
      * @return Os códigos das salas adjacentes. por exemplo 'adjacentes: sala01,
      *         sala02, sala03'".
      */
-
     public String getSaidaString() {
         String strSaidas = "";
         for (String s : saidas.keySet()) {
