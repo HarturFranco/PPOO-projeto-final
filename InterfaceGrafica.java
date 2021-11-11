@@ -48,7 +48,7 @@ public class InterfaceGrafica {
         this.painelDicas = new JPanel();
         this.painelMarcacoes = new JPanel();
         this.painelTitulo = new JPanel();
-        this.tComando = new JTextField("");
+        this.tComando = new JTextField();
         criaGUI();
     }
 
@@ -86,10 +86,22 @@ public class InterfaceGrafica {
         pane.add(painelDicas, BorderLayout.WEST);
 
 
+//            lInformacoes.setPreferredSize(new Dimension(900, 75));
+
         // Painel Inferior com informacoes do jogo + input de comandos
-//        painelInferior.setLayout(new GridLayout(0, 1));
+//        painelInferior.setLayout(new GridLayout(, 1));
         painelInferior.setLayout(new BoxLayout(painelInferior, BoxLayout.Y_AXIS));
         painelInferior.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        painelInferior.setPreferredSize(new Dimension(1135, 200));
+
+        lInformacoes.setPreferredSize(new Dimension(1135, 150));
+        lInformacoes.setMaximumSize(new Dimension(1135, 150));
+        painelInferior.add(lInformacoes);
+
+        JPanel painelInput = new JPanel();
+        painelInput.setLayout(new BoxLayout(painelInput, BoxLayout.X_AXIS));
+        painelInput.setPreferredSize(new Dimension(1135, 50));
+
         tComando.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -98,11 +110,17 @@ public class InterfaceGrafica {
             }
         });
 
-//            lInformacoes.setPreferredSize(new Dimension(900, 75));
-        painelInferior.add(lInformacoes);
-        painelInferior.add(tComando);
-        painelInferior.setPreferredSize(new Dimension(1135, 100));
+        painelInput.add(tComando);
+
+        painelInferior.add(painelInput);
+
+
+
+
+        //        painelInferior.add(tComando);
+
         pane.add(painelInferior, BorderLayout.PAGE_END);
+
 
 
     }
@@ -161,15 +179,15 @@ public class InterfaceGrafica {
     }
 
     public void atualizaDicas(String sDicas) {
-        lDicas.setText(String.format("<html><div style=\"width:%dpx;\"><pre>%s</pre></div></html>", painelDicas.getWidth() , sDicas));
+        lDicas.setText(String.format("<html><pre>%s</pre></html>", sDicas));
     }
 
     public void atualizaSalasMarcadas(String sSalasMarcadas) {
-        lMarcacoes.setText(String.format("<html><div style=\"width:%dpx;\"><pre>%s</pre></div></html>", painelMarcacoes.getWidth() , sSalasMarcadas));
+        lMarcacoes.setText(String.format("<html><pre>%s</pre></html>", sSalasMarcadas));
     }
 
     public void atualizaSaidaTexto(String sInformacao) {
-        lInformacoes.setText(String.format("<html><div style=\"width:%dpx;\"><pre>%s</pre></div></html>", painelInferior.getWidth() , sInformacao));
+        lInformacoes.setText(String.format("<html><pre>%s</pre></html>",sInformacao));
     }
 
     public void atualizarMapa(String sMapa) {
