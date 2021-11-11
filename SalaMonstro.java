@@ -61,6 +61,6 @@ public class SalaMonstro extends Sala
     @Override
     public String atirarNaSala(Jogador jogador) {
         this.monstro = false;
-        return "Você atira às cegas em direção a porta da " + this.getDescricao() +". Você ouve um terrível urro de dor seguido da respiração monstruosa que passa de ofegante, para fraca, para inexistente em poucos minutos.\n Agora, não há mais som nenhum vindo daquela sala.\n";
+        return "Você atira às cegas em direção a porta da " + this.getDescricao() +". \nVocê ouve um terrível urro de dor seguido da respiração monstruosa que passa de ofegante, para fraca, para inexistente em poucos minutos. \nAgora, não há mais som nenhum vindo daquela sala.\n";
     }
 }
