@@ -20,9 +20,9 @@ public class Sala {
     HashMap<String, Sala> saidas;
 
     /**
-     * Cria ua sala com a "descricao" passada. Inicialmente, ela nao tem saidas.
+     * Cria uma sala com a "descricao" passada. Inicialmente, ela nao tem saidas.
      * "descricao" eh algo como "Sala 01" ou "Sala 02"
-     * 
+     * @param código da sala inciada.
      */
     public Sala(String descricao) {
         this.descricao = descricao;
@@ -32,15 +32,15 @@ public class Sala {
     /**
      * Define uma saida desse ambiente
      * 
-     * @param cordenada, cordenada de uma saida.
-     * @param adjacente  O ambiente na direcao dada
+     * @param código da saida.
+     * @param objeto da sala adicionada como saída
      */
     public void adicionarSaida(String cordenada, Sala adjacente) {
         saidas.put(cordenada, adjacente);
     }
 
     /**
-     * @return A descricao da sala.
+     * @return O código da sala.
      */
     public String getDescricao() {
         return descricao;
@@ -54,10 +54,6 @@ public class Sala {
      * @return A sala para qual o jogador irá.
      */
     public Sala getSaida(String cordenada) {
-
-        for (String s : saidas.keySet()) {
-            System.out.println(s);
-        }
         return saidas.get(cordenada);
     }
 
