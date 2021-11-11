@@ -184,9 +184,13 @@ public class Mapa {
         throw new InvalidParameterException("Essa sala não existe!");
         
     int[] aux = cordenadas.get(codSala);
-    System.out.println(aux[0]);
-    trocaRecurs(' ', '/', aux[0], aux[1]);
-    salasMarcadas.add(codSala);
+    
+    if(mapa[aux[0]][aux[1]] == '╱')
+        trocaRecurs('╱', '╳', aux[0], aux[1]);
+    else{
+        trocaRecurs(' ', '╱', aux[0], aux[1]);
+        salasMarcadas.add(codSala);
+    }
   }
 
   public void desmarcar(String codSala) {
@@ -194,7 +198,12 @@ public class Mapa {
         throw new InvalidParameterException("Essa sala não existe!");
         
     int[] aux = cordenadas.get(codSala);
-    trocaRecurs('/', ' ', aux[0], aux[1]);
+    
+    if(mapa[aux[0]][aux[1]] == '╳')
+        trocaRecurs('╳', ' ', aux[0], aux[1]);
+    else
+        trocaRecurs('╱', ' ', aux[0], aux[1]);
+    
     salasMarcadas.remove(codSala);
   }
 

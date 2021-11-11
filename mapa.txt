@@ -13,7 +13,7 @@ tipo
 
 id 4
 adjacentes 3 9 10
-tipo armadilha
+tipo 
 
 id 5
 adjacentes 1 6 11
@@ -29,7 +29,7 @@ tipo
 
 id 8
 adjacentes 3 14
-tipo buraco
+tipo 
 
 id 9
 adjacentes 4 12 15
@@ -37,7 +37,7 @@ tipo buraco
 
 id 10
 adjacentes 4 9 16
-tipo 
+tipo armadilha
 
 id 11
 adjacentes 5 12 17
@@ -96,7 +96,7 @@ adjacentes 23 25
 tipo 
 
 id 25
-adjacentes 20 23 26
+adjacentes 20 24 26
 tipo 
 
 id 26
