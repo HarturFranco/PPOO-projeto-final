@@ -300,7 +300,7 @@ public class Mapa {
 
     /**
      *  Retorna as salas que estão como marcadas pelo jogador
-     * @return 
+     * @return um ArrayList com as salas que estão marcadas
      */
     public ArrayList<String> getSalasMarcadas() {
         return salasMarcadas;

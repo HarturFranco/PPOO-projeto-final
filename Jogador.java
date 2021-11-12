@@ -38,31 +38,56 @@ public class Jogador {
         this.salaAtual = salaInicio;
     }
 
-    // TODO - Retornar Copia do objeto para manter encapsulamento?
+    /**
+     *  Retorna a sala onde o jogadore está
+     * @return objeto da sala onde o jogador está
+     */
     public Sala getSalaAtual() {
         return salaAtual;
     }
 
+    /**
+     *  Retorna se o jogadore tem a chave
+     * @return boleano dizendo se o jogador tem chave
+     */
     public boolean temChave() {
         return chave;
     }
 
+    /**
+     *  Muda o jogador para que ele tenha a chave
+     */
     public void pegaChave() {
         chave = true;
     }
 
+    /**
+     *  Retorna se o jogador pode atirar
+     * @return boleano dizendo se o jogador pode atirar
+     */
     public boolean temArma() {
         return arma;
     }
 
+    /**
+     *  Retorna se o jogador está vivo
+     * @return boleano dizendo se o jogador está vivo
+     */
     public boolean estaVivo() {
         return vivo;
     }
 
+    /**
+     *  Retorna se o jogador está livre da masmorra
+     * @return boleano dizendo se o jogador está livre
+     */
     public boolean estaLivre() {
         return this.livre;
     }
-
+    
+    /**
+     *  Muda o estado de jogador para morto
+     */
     public void setMorto() {
         vivo = false;
     }
@@ -141,7 +166,7 @@ public class Jogador {
     }
 
     /**
-     * metodo retorna a arte deo mapa do jogador
+     * metodo retorna a arte do mapa do jogador
      *
      * @return a arte do mapa
      */
