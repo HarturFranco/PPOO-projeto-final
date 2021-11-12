@@ -73,7 +73,7 @@ tipo monstro
 
 id 19
 adjacentes 13 18 20
-tipo buraco
+tipo armadilha
 
 id 20
 adjacentes 14 19 25
