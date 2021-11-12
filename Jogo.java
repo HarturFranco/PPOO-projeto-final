@@ -12,7 +12,7 @@ import java.security.InvalidParameterException;
  * "jogar".
  * 
  * Essa classe principal cria e inicializa todas as outras: ela cria os
- * ambientes, cria o analisador e comeca o jogo. Ela tambeme avalia e executa os
+ * ambientes, cria o analisador e comeca o jogo. Ela também avalia e executa os
  * comandos que o analisador retorna.
  * 
  * @author Michael Kölling, David J. Barnes, Alexandre Rabello, Arthur Franco, Felipe Godoi e João Paulo Paiva
