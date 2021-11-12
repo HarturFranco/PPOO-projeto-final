@@ -110,7 +110,7 @@ public class Mapa {
             linha = arq.readLine();
 
             //procura pelo indicador de mapa visual
-            while (!linha.equals("-mapa-") || linha != null) {
+            while (!linha.equals("-mapa-") && linha != null) {
                 linha = arq.readLine();
             }
             
