@@ -28,12 +28,13 @@ public class Mapa {
     private ArrayList<String> salasMarcadas;
     private HashMap<String, int[]> cordenadas;
 
-    public Mapa(String nomeMapa) throws Exception {
+    public Mapa(String nomeMapa) throws Exception{
         this.todasSalas = new HashMap<>();
         this.salasMarcadas = new ArrayList<>();
         this.cordenadas = new HashMap<>();
-
         this.iniciarMapa(nomeMapa);
+
+
     }
 
     /**
@@ -110,7 +111,7 @@ public class Mapa {
             linha = arq.readLine();
 
             //procura pelo indicador de mapa visual
-            while (!linha.equals("-mapa-") || linha != null) {
+            while (!linha.equals("-mapa-") && linha != null) {
                 linha = arq.readLine();
             }
             
@@ -194,7 +195,6 @@ public class Mapa {
     public String getMapa() {
         String s = "<html><pre>";
         for (int i = 0; i < mapa.length; i++) {
-            System.out.println(mapa[i]);
             s += new String(mapa[i]) + "<br>";
         }
         return s + "</pre></html>";
