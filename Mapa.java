@@ -33,8 +33,6 @@ public class Mapa {
         this.salasMarcadas = new ArrayList<>();
         this.cordenadas = new HashMap<>();
         this.iniciarMapa(nomeMapa);
-
-
     }
 
     /**
