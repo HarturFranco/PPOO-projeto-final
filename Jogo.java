@@ -8,8 +8,7 @@ import java.security.InvalidParameterException;
  * Esta classe eh parte da aplicacao "Fuga da Masmorra". "Fuga da Masmorral" eh
  * um jogo de aventura muito simples, baseado em texto.
  * 
- * Para jogar esse jogo, crie uma instancia dessa classe e chame o metodo
- * "jogar".
+ * Para jogar esse jogo, crie uma instancia dessa classe.
  * 
  * Essa classe principal cria e inicializa todas as outras: ela cria os
  * ambientes, cria o analisador e comeca o jogo. Ela também avalia e executa os
