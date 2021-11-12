@@ -160,7 +160,6 @@ public class Jogador {
      *
      * @return Salas do mapa marcadas pelo jogador
      */
-    // TODO - seria legal retornar uma string?
     public ArrayList<String> getMarcadas() {
         return this.mapa.getSalasMarcadas();
     }
@@ -170,7 +169,6 @@ public class Jogador {
      *
      * @return a arte do mapa
      */
-    // TODO - seria legal retornar uma string?
     public String getMapa() {
         return mapa.getMapa();
     }
@@ -181,7 +179,6 @@ public class Jogador {
      * @return boolean com valor true se o jogador tem chave e esta na sala da saida
      */
     public String fugir() {
-        // TODO - Usar Excecao?
         if (temChave()) {
             if (salaAtual instanceof SalaSaida) {
                 this.livre = true;
