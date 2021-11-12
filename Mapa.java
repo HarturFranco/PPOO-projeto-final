@@ -28,6 +28,15 @@ public class Mapa {
     private ArrayList<String> salasMarcadas;
     private HashMap<String, int[]> cordenadas;
 
+
+    /**
+     * Inicia os atributos do mapa e lê as informações de um arquivo de texto
+     * 
+     * @param nomeMapa nome do arquivo de texto a ser lido
+     * @throws exception - joga as exceções de IO e demais
+     *  para serem mostradas na GUI.
+     * 
+     */
     public Mapa(String nomeMapa) throws Exception{
         this.todasSalas = new HashMap<>();
         this.salasMarcadas = new ArrayList<>();
@@ -37,6 +46,8 @@ public class Mapa {
 
     /**
      * @param nomeMapa nome do arquivo de texto a ser lido
+     * @throws exception - joga as exceções de IO e demais
+     *  para serem mostradas na GUI.
      * Lê e define o mapa de um arquivo txt 
      */
     private void iniciarMapa(String nomeMapa) throws Exception {
