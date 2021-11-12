@@ -1,19 +1,19 @@
 /**
- * Esta classe eh parte da aplicacao "World of Zuul".
- * "World of Zuul" eh um jogo de aventura muito simples, baseado em texto.
- * <p>
+ * Esta classe eh parte da aplicacao "Fuga da Masmorra". "Fuga da Masmorral" eh
+ * um jogo de aventura muito simples, baseado em texto.
+ *
  * Essa classe guarda informacoes sobre um comando que foi digitado pelo
  * usuario. Um comando atualmente consiste em duas strings: uma palavra
  * de comando e uma segunda palavra (por exemplo, se o campo for "pegar
  * mapa", entao as duas strings obviamente serao "pegar" e "mapa").
- * <p>
+ *
  * Isso eh usado assim: comandos ja estao validados como comandos validos
  * Se o usuario entrou um comando invalido (uma palavra que nao eh
  * conhecida) entao o a palavra de comando eh <null>.
- * <p>
+ *
  * Se o comando tem so uma palavra, a segunda palavra eh <null>
  *
- * @author Michael Kölling and David J. Barnes (traduzido por Julio Cesar Alves)
+ * @author Michael Kölling and David J. Barnes, Alexandre Rabello, Arthur Franco, Felipe Godoi e João Paulo Paiva
  * @version 2011.07.31 (2016.02.01)
  */
 

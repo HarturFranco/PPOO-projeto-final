@@ -1,9 +1,9 @@
 import java.util.HashMap;
 
 /**
- * Esta classe eh parte da aplicacao "World of Zuul".
- * "World of Zuul" eh um jogo de aventura muito simples, baseado em texto.
- * <p>
+ *  Esta classe eh parte da aplicacao "Fuga da Masmorra". "Fuga da Masmorral" eh
+ *  um jogo de aventura muito simples, baseado em texto.
+ *
  * Essa classe guarda uma enumeracao de todos os comandos conhecidos do
  * jogo. Ela eh usada no reconhecimento de comandos como eles sao digitados.
  *
