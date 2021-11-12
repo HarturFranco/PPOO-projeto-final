@@ -34,7 +34,10 @@ public class InterfaceGrafica {
     private Jogo jogo;
     private Analisador analisador;
 
-
+    /**
+     * Construtor Da classe InterfaceGrafica. - inicializa cos componentes graficos
+     * @param jogo objeto da classe Jogo
+     */
     public InterfaceGrafica(Jogo jogo) {
         analisador = new Analisador();
         this.jogo = jogo;
@@ -167,9 +170,6 @@ public class InterfaceGrafica {
         }catch (InvalidParameterException e){
             atualizaDicas(e.getMessage());
         }
-
-
-
     }
 
     public void sair(String t, String m) {

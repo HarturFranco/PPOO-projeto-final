@@ -45,9 +45,6 @@ public class Jogo {
         } catch (Exception e){
             ig.sair("Erro", e.getMessage());
         }
-
-
-
     }
 
     /**
@@ -104,8 +101,8 @@ public class Jogo {
     }
 
     /**
-     *
      * Marca a sala passada por comando
+     * @param comando
      */
     private void marcarSala(Comando comando) {
         //
@@ -123,8 +120,8 @@ public class Jogo {
     }
 
     /**
-     *
      * Desmarca a sala passada por comando
+     * @param comando
      */
     private void desmarcarSala(Comando comando) {
         //
@@ -142,7 +139,6 @@ public class Jogo {
     }
 
     /**
-     *
      * Imprime todas as salas marcadas pelo jogador
      */
     private void imprimirSalasMarcadas() {
@@ -157,8 +153,8 @@ public class Jogo {
     }
 
     /**
-     *
      * executa a acao de fugir pelo jogador
+     * @param comando
      */
     private void fugir(Comando comando) {
 
@@ -188,6 +184,7 @@ public class Jogo {
     /**
      * Tenta ir em uma codSala. Se existe uma saida entra no novo ambiente, caso
      * contrario imprime mensagem de erro.
+     * @param comando
      */
     private void irParaAmbiente(Comando comando) {
         if (!comando.temSegundaPalavra()) {
@@ -200,9 +197,11 @@ public class Jogo {
         ig.atualizarMapa(jogador.getMapa());
     }
 
+
     /**
      * Tenta atirar em direção a uma sala, se houver uma conexao entre as salas,
      * atira, senão envia um erro.
+     * @param comando
      */
     private void atirar(Comando comando) {
         if (!comando.temSegundaPalavra()) {
@@ -222,7 +221,7 @@ public class Jogo {
     /**
      * "Sair" foi digitado. Verifica o resto do comando pra ver se nos queremos
      * realmente sair do jogo.
-     * 
+     * @param comando
      * @return true, se este comando sai do jogo, false, caso contrario
      */
     private boolean sair(Comando comando) {
