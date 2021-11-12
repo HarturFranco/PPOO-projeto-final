@@ -4,7 +4,7 @@ import java.security.InvalidParameterException;
 /**
  * Classe Jogo - Classe que controla o percorrer do jogo faz I/O com a GUI
  *  e executa as jogadas/comandos.
- * 
+ *
  * Esta classe eh parte da aplicacao "Fuga da Masmorra". "Fuga da Masmorral" eh
  * um jogo de aventura muito simples, baseado em texto.
  * 
@@ -52,7 +52,7 @@ public class Jogo {
      * Imprime na GUI a mensagem de abertura para o jogador.
      */
     private void imprimirBoasVindas() {
-        ig.atualizaSaidaTexto("Bem-Vindo ao Jogo Fuga da Masmorra, um jogo de aventura cujo seu objetivo é matar o monstro," +
+        ig.atualizarSaidaTexto("Bem-Vindo ao Jogo Fuga da Masmorra, um jogo de aventura cujo seu objetivo é matar o monstro," +
                 " pegar sua chave da masmorra e fugir evitando os diversos perigos <br>");
         this.ig.atualizarMapa(jogador.getMapa());
     }
@@ -77,7 +77,7 @@ public class Jogo {
             atirar(comando);
             break;
         case DESCONHECIDO:
-            ig.atualizaDicas("Eu nao entendi o que voce disse...");
+            ig.atualizarDicas("Eu nao entendi o que voce disse...");
             break;
         case DESMARCAR:
             desmarcarSala(comando);
@@ -95,7 +95,7 @@ public class Jogo {
             querSair = sair(comando);
             break;
         }
-        
+
         //Se o jogador morrer ou fugir, o jogo acaba.
         if (!jogador.estaVivo() || jogador.estaLivre()) {
             querSair = true;
@@ -105,8 +105,8 @@ public class Jogo {
 
     /**
      * Marca a sala passada por comando
-     * @param comando comando passado, deve 
-     *  ter uma segunda palavra como o 
+     * @param comando comando passado, deve
+     *  ter uma segunda palavra como o
      *  código da sala a ser marcada.
      */
     private void marcarSala(Comando comando) {
@@ -117,17 +117,17 @@ public class Jogo {
         String segundaPalavra = comando.getSegundaPalavra();
 
         jogador.marcarSala(segundaPalavra);
-        
+
         //atualiza a GUI
-        ig.atualizaDicas("Sala " + segundaPalavra + " marcada!");
+        ig.atualizarDicas("Sala " + segundaPalavra + " marcada!");
         ig.atualizarMapa(jogador.getMapa());
         imprimirSalasMarcadas();
     }
 
     /**
      * Desmarca a sala passada por comando
-     * @param comando comando passado, deve 
-     *  ter uma segunda palavra como o 
+     * @param comando comando passado, deve
+     *  ter uma segunda palavra como o
      *  código da sala a ser desmarcada.
      */
     private void desmarcarSala(Comando comando) {
@@ -138,8 +138,8 @@ public class Jogo {
         String segundaPalavra = comando.getSegundaPalavra();
 
         jogador.desmarcarSala(segundaPalavra);
-        
-        ig.atualizaDicas("Sala " + segundaPalavra + " desmarcada!");
+
+        ig.atualizarDicas("Sala " + segundaPalavra + " desmarcada!");
         ig.atualizarMapa(jogador.getMapa());
         imprimirSalasMarcadas();
     }
@@ -154,54 +154,55 @@ public class Jogo {
         for (String marcada : marcadas) {
             salasMarcadas += marcada+"-";
         }
-        ig.atualizaSalasMarcadas(salasMarcadas);
+        // TODO - Enviar até vazia
+        ig.atualizarSalasMarcadas(salasMarcadas);
     }
 
     /**
      * executa a acao de fugir pelo jogador
-     * @param comando comando passado, deve 
+     * @param comando comando passado, deve
      *  não ter uma segunda palavra.
      */
     private void fugir(Comando comando) {
         if (comando.temSegundaPalavra()) {
             throw new InvalidParameterException("fugir o que?");
         }
-        
+
         String saida = jogador.fugir();
 
         //Se o jogador não consegue fugir, é uma mensagem de 'ajuda'
         // então é colocada em um painel diferente.
         if(jogador.estaLivre()){
-            ig.atualizaSaidaTexto(saida);
+            ig.atualizarSaidaTexto(saida);
         }else {
-            ig.atualizaDicas(saida);
+            ig.atualizarDicas(saida);
         }
     }
 
     /**
-     * imprime informacoes de ajuda. Aqui nos imprimimos 
+     * imprime informacoes de ajuda. Aqui nos imprimimos
      *  a lista de palavras de comando na GUI.
      */
     private void imprimirAjuda() {
-        ig.atualizaDicas("suas palavras de comando são: <br>" + analisador.getComandos());
+        ig.atualizarDicas("suas palavras de comando são: <br>" + analisador.getComandos());
     }
 
     /**
      * Tenta ir em uma sala. Se existe uma saida, entra no nova sala, caso
      *  contrario imprime mensagem de erro.
      *  Nesse método o texto da narrativa vai para GUI.
-     * 
-     * @param comando comando passado, deve 
-     *  ter uma segunda palavra como o 
+     *
+     * @param comando comando passado, deve
+     *  ter uma segunda palavra como o
      *  código da sala para onde o jogador vai.
      */
     private void irParaAmbiente(Comando comando) {
         if (!comando.temSegundaPalavra()) {
             throw new InvalidParameterException("Ir pra onde?");
         }
-        
+
         String codSala = comando.getSegundaPalavra();
-        ig.atualizaSaidaTexto(jogador.entrar(codSala));
+        ig.atualizarSaidaTexto(jogador.entrar(codSala));
         ig.atualizarMapa(jogador.getMapa());
     }
 
@@ -209,9 +210,9 @@ public class Jogo {
     /**
      * Tenta atirar em direção a uma sala, se houver uma conexao entre as salas,
      * atira, senão envia um erro.
-     * 
-     * @param comando comando passado, deve 
-     *  ter uma segunda palavra como o 
+     *
+     * @param comando comando passado, deve
+     *  ter uma segunda palavra como o
      *  código da sala onde o jogador vai atirar.
      */
     private void atirar(Comando comando) {
@@ -223,9 +224,9 @@ public class Jogo {
         //Se o jogador não tem balas, é uma mensagem de 'ajuda'
         // então é colocada em um painel diferente.
         if (jogador.temArma()){
-            ig.atualizaSaidaTexto(jogador.atirar(codSala));
+            ig.atualizarSaidaTexto(jogador.atirar(codSala));
         } else {
-            ig.atualizaDicas(jogador.atirar(codSala));
+            ig.atualizarDicas(jogador.atirar(codSala));
         }
 
     }
@@ -233,7 +234,7 @@ public class Jogo {
     /**
      * "Sair" foi digitado. Verifica o resto do comando pra ver se nos queremos
      * realmente sair do jogo.
-     * @param comando comando passado, deve 
+     * @param comando comando passado, deve
      *  não ter uma segunda palavra.
      * @return true, se este comando sai do jogo, false, caso contrario
      */

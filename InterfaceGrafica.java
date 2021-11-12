@@ -5,12 +5,15 @@ import java.awt.event.ActionListener;
 import java.security.InvalidParameterException;
 
 /**
- * Classe InterfaceGrafica - eh a clase onde se encontra a interface grafica do jogo
- * <p>
- * Esta classe eh parte da aplicacao "Fuga da Masmorra".
+ * Classe InterfaceGrafica - interfgace grafica do jogo.
+ *
+ * Esta classe eh parte da aplicacao "Fuga da Masmorra"."Fuga da Masmorra" eh
+ * um jogo de aventura muito simples, baseado em texto.
+ *
  * "Fuga da Masmorral" eh um jogo de aventura muito simples, baseado em texto.
- * <p>
- * A classe "InterfaceGrafica" eh...
+ * A classe "InterfaceGrafica" cria a interface grafica do jogo que o usuario final tera acesso as funcionalidades
+ * do jogo; Mostra Informacoes como dicas, o mapa do jogo, as salas marcadas pelo usuario, posicao
+ * do jogador no mapa e a propria narrativa do jogo.
  *
  * @author Alexandre Rabello, Arthur Franco, Felipe Godoi e João Paulo Paiva.
  * @version 2021.11.06
@@ -26,16 +29,15 @@ public class InterfaceGrafica {
     private JLabel lDicas;
     private JTextField tComando;
     private JFrame fJanela;
-    private JPanel painelInferior;
-    private JPanel painelDicas;
-    private JPanel painelMarcacoes;
-    private JPanel painelTitulo;
+
     // Jogo e analisador.
     private Jogo jogo;
     private Analisador analisador;
 
     /**
-     * Construtor Da classe InterfaceGrafica. - inicializa cos componentes graficos
+     * Construtor Da classe InterfaceGrafica. - inicializa cos componentes graficos, analizador e atribui o objeto
+     * passaddo por parametro ao atributo jogo;
+     *
      * @param jogo objeto da classe Jogo
      */
     public InterfaceGrafica(Jogo jogo) {
@@ -44,14 +46,10 @@ public class InterfaceGrafica {
         this.fJanela = new JFrame("Fuga da Masmorra.");
         this.lTitulo = new JLabel("Fuga da Masmorra.");
         this.lMapa = new JLabel();
-        this.lMarcacoes = new JLabel("Marcações: ");
-        this.lDicas = new JLabel("<html>Dicas:</html>");
-        this.lInformacoes = new JLabel("<html>Bem-Vindo ao Jogo Fuga da Masmorra, um jogo de aventura cujo seu objetivo é matar o monstro," +
-                "pegar sua chave e fugir da masmorra evitando seus diversos perigos; </html>");
-        this.painelInferior = new JPanel();
-        this.painelDicas = new JPanel();
-        this.painelMarcacoes = new JPanel();
-        this.painelTitulo = new JPanel();
+        this.lMarcacoes = new JLabel("Salas Marcadas:");
+        this.lDicas = new JLabel("Dicas:");
+        this.lInformacoes = new JLabel("<html>Bem-Vindo ao Jogo Fuga da Masmorra, um jogo de aventura cujo seu " +
+                "objetivo é matar o monstro, pegar sua chave e fugir da masmorra evitando seus diversos perigos; </html>");
         this.tComando = new JTextField();
         criaGUI();
     }
@@ -61,20 +59,20 @@ public class InterfaceGrafica {
      */
     private void addComponentesAoPane(Container pane) {
 
+        JPanel painelTitulo = new JPanel();
+
         // Titulo da pagina
         painelTitulo.add(lTitulo);
         painelTitulo.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         pane.add(painelTitulo, BorderLayout.NORTH);
 
-        // TODO - carregar do arquivo texto.
         // mapa
-
-
         lMapa.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 18));
         lMapa.setMinimumSize(new Dimension(735, 500));
         pane.add(lMapa, BorderLayout.CENTER);
 
         // Salas Marcadas
+        JPanel painelMarcacoes = new JPanel();
         painelMarcacoes.setLayout(new BoxLayout(painelMarcacoes, BoxLayout.Y_AXIS));
         painelMarcacoes.setPreferredSize(new Dimension(200, 500));
         painelMarcacoes.add(lMarcacoes);
@@ -82,19 +80,15 @@ public class InterfaceGrafica {
         pane.add(painelMarcacoes, BorderLayout.EAST);
 
         // Dicas
-
+        JPanel painelDicas = new JPanel();
         painelDicas.setLayout(new BoxLayout(painelDicas, BoxLayout.Y_AXIS));
         painelDicas.setPreferredSize(new Dimension(200, 500));
-//        lDicas.setMaximumSize(new Dimension(200, 500));
         painelDicas.add(lDicas);
         painelDicas.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         pane.add(painelDicas, BorderLayout.WEST);
 
-
-//            lInformacoes.setPreferredSize(new Dimension(900, 75));
-
-        // Painel Inferior com informacoes do jogo + input de comandos
-//        painelInferior.setLayout(new GridLayout(, 1));
+        // Painel Inferior
+        JPanel painelInferior = new JPanel();
         painelInferior.setLayout(new BoxLayout(painelInferior, BoxLayout.Y_AXIS));
         painelInferior.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         painelInferior.setPreferredSize(new Dimension(1135, 200));
@@ -112,24 +106,14 @@ public class InterfaceGrafica {
         tComando.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-//                    System.out.println(actionEvent.getActionCommand());
+                //Ao acionar o evento "Enter", chama o metodo descacha Comando
                 despachaComando(actionEvent.getActionCommand());
             }
         });
 
         painelInput.add(tComando);
-
         painelInferior.add(painelInput);
-
-
-
-
-        //        painelInferior.add(tComando);
-
         pane.add(painelInferior, BorderLayout.PAGE_END);
-
-
-
     }
 
     /**
@@ -137,12 +121,11 @@ public class InterfaceGrafica {
      */
     private void criaGUI() {
 
-        //Create and set up the window.
-
+        //Cria e configura a janela.
         fJanela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         fJanela.setSize(new Dimension(1135, 600));
         fJanela.setResizable(true);
-        //Set up the content pane.
+        //Configura os pane.
         addComponentesAoPane(fJanela.getContentPane());
 
         fJanela.pack();
@@ -155,10 +138,14 @@ public class InterfaceGrafica {
         fJanela.setVisible(true);
     }
 
-
+    /**
+     * Despacha executa o comando digitado pelo usuario e trata.
+     *
+     * @param actionCommand string com comando textual entrado pelo usuario
+     */
     private void despachaComando(String actionCommand) {
         // apaga comando do textArea
-        atualizaDicas("");
+        atualizarDicas("");
         tComando.setText("");
 
         Comando comando = analisador.pegarComando(actionCommand);
@@ -167,36 +154,62 @@ public class InterfaceGrafica {
             if (jogo.processarComando(comando)) {
                 sair("Fim de Jogo", "Ao clicar em \"OK!\" o jogo será finalizado.");
             }
-        }catch (InvalidParameterException e){
-            atualizaDicas(e.getMessage());
+        } catch (InvalidParameterException e) {
+            atualizarDicas(e.getMessage());
         }
     }
 
+    /**
+     * Exibe JOptionPane cujo acao eh finalizar o jogo.
+     *
+     * @param t Titulo da janela
+     * @param m Mensagem a ser exibida
+     */
     public void sair(String t, String m) {
         int ok = JOptionPane.showOptionDialog(fJanela,
-                m,t,
+                m, t,
                 JOptionPane.DEFAULT_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
                 null,
                 null,
                 "Ok!");
-        if (ok == 0){
+        if ((ok == 0) || (ok == -1)) {
             fJanela.dispose();
         }
     }
 
-    public void atualizaDicas(String sDicas) {
-        lDicas.setText(String.format("<html>Dicas: %s</html>", sDicas));
+    /**
+     * Atualiza o campo de dicas da Interface Grafica com o valor recebido por parametro
+     *
+     * @param sDicas Valor a ser inserido no campo de dicas da Interface Grafica
+     */
+    public void atualizarDicas(String sDicas) {
+        this.lDicas.setText(String.format("<html>Dicas: %s</html>", sDicas));
     }
 
-    public void atualizaSalasMarcadas(String sSalasMarcadas) {
-        lMarcacoes.setText(String.format("<html>Salas Marcadas: %s</html>", sSalasMarcadas));
+    /**
+     * Atualiza o campo de Salas Marcadas da Interface Grafica com o valor recebido por parametro
+     *
+     * @param sSalasMarcadas Valor a ser inserido no campo de Salas Marcadas da Interface Grafica
+     */
+    public void atualizarSalasMarcadas(String sSalasMarcadas) {
+        this.lMarcacoes.setText(String.format("<html>Salas Marcadas: %s</html>", sSalasMarcadas));
     }
 
-    public void atualizaSaidaTexto(String sInformacao) {
-        lInformacoes.setText(String.format("<html><pre>%s</pre></html>",sInformacao));
+    /**
+     * Atualiza o campo de Informacoes da Interface Grafica com o valor recebido por parametro
+     *
+     * @param sInformacao Valor a ser inserido no campo de Informacoes da Interface Grafica
+     */
+    public void atualizarSaidaTexto(String sInformacao) {
+        this.lInformacoes.setText(String.format("<html><pre>%s</pre></html>", sInformacao));
     }
 
+    /**
+     * Atualiza o campo do Mapa na Interface Grafica com o valor recebido por parametro
+     *
+     * @param sMapa Valor a ser inserido no campo do Mapa da Interface Grafica
+     */
     public void atualizarMapa(String sMapa) {
         this.lMapa.setText(sMapa);
     }
